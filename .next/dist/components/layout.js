@@ -143,7 +143,7 @@ var NavigationLink = function (_PureComponent) {
 exports.default = function (_ref) {
     var children = _ref.children,
         _ref$title = _ref.title,
-        title = _ref$title === undefined ? 'This is the default title' : _ref$title;
+        title = _ref$title === undefined ? '線上讀書會官方網站' : _ref$title;
 
     var closeButton = _react2.default.createElement(_Button2.default, {
         icon: true,
@@ -152,49 +152,49 @@ exports.default = function (_ref) {
         tooltipPosition: 'left',
         __source: {
             fileName: _jsxFileName,
-            lineNumber: 53
+            lineNumber: 54
         }
     }, 'close');
 
     return _react2.default.createElement('div', {
         __source: {
             fileName: _jsxFileName,
-            lineNumber: 67
+            lineNumber: 68
         }
     }, _react2.default.createElement(_head2.default, {
         __source: {
             fileName: _jsxFileName,
-            lineNumber: 68
+            lineNumber: 69
         }
     }, _react2.default.createElement('title', {
         __source: {
             fileName: _jsxFileName,
-            lineNumber: 69
+            lineNumber: 70
         }
     }, title), _react2.default.createElement('meta', { charSet: 'utf-8', __source: {
             fileName: _jsxFileName,
-            lineNumber: 70
+            lineNumber: 71
         }
     }), _react2.default.createElement('meta', { name: 'viewport', content: 'initial-scale=1.0, width=device-width', __source: {
             fileName: _jsxFileName,
-            lineNumber: 71
+            lineNumber: 72
         }
     }), _react2.default.createElement('link', { rel: 'stylesheet', href: '/static/react-md.light_blue-yellow.min.css', __source: {
             fileName: _jsxFileName,
-            lineNumber: 72
+            lineNumber: 73
         }
     }), _react2.default.createElement('link', { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Roboto:300,400,500', __source: {
             fileName: _jsxFileName,
-            lineNumber: 73
+            lineNumber: 74
         }
     }), _react2.default.createElement('link', { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Material+Icons', __source: {
             fileName: _jsxFileName,
-            lineNumber: 74
+            lineNumber: 75
         }
     })), _react2.default.createElement('header', {
         __source: {
             fileName: _jsxFileName,
-            lineNumber: 78
+            lineNumber: 79
         }
     }, _react2.default.createElement(_NavigationDrawers2.default, {
         navItems: [_react2.default.createElement(_ListItem2.default, {
@@ -204,30 +204,47 @@ exports.default = function (_ref) {
             leftIcon: _react2.default.createElement(_FontIcons2.default, {
                 __source: {
                     fileName: _jsxFileName,
-                    lineNumber: 85
+                    lineNumber: 86
                 }
             }, 'inbox'),
             tileClassName: 'md-list-tile--mini',
-            primaryText: 'Root',
+            primaryText: '精彩課程表',
             __source: {
                 fileName: _jsxFileName,
-                lineNumber: 81
+                lineNumber: 82
             }
         }), _react2.default.createElement(_ListItem2.default, {
             key: '1',
             component: NavigationLink,
-            href: '/non-existing-page',
+            href: '/donate',
             leftIcon: _react2.default.createElement(_FontIcons2.default, {
                 __source: {
                     fileName: _jsxFileName,
-                    lineNumber: 93
+                    lineNumber: 94
                 }
             }, 'star'),
             tileClassName: 'md-list-tile--mini',
-            primaryText: '404 page',
+            primaryText: '贊助大德箱',
             __source: {
                 fileName: _jsxFileName,
-                lineNumber: 89
+                lineNumber: 90
+            }
+        }), _react2.default.createElement(_ListItem2.default, {
+            key: '2',
+            component: NavigationLink,
+            href: '/about',
+            leftIcon: _react2.default.createElement(_FontIcons2.default, {
+                __source: {
+                    fileName: _jsxFileName,
+                    lineNumber: 103
+                }
+            }, 'star'),
+            tileClassName: 'md-list-tile--mini',
+            primaryText: '關於線上讀書會',
+
+            __source: {
+                fileName: _jsxFileName,
+                lineNumber: 99
             }
         })],
         contentClassName: 'md-grid',
@@ -235,48 +252,11 @@ exports.default = function (_ref) {
         mobileDrawerType: _NavigationDrawers2.default.DrawerTypes.TEMPORARY_MINI,
         tabletDrawerType: _NavigationDrawers2.default.DrawerTypes.PERSISTENT_MINI,
         desktopDrawerType: _NavigationDrawers2.default.DrawerTypes.PERSISTENT_MINI,
-        toolbarTitle: 'Hello, World!',
+        toolbarTitle: title,
         toolbarActions: closeButton,
         __source: {
             fileName: _jsxFileName,
-            lineNumber: 79
+            lineNumber: 80
         }
-    }, _react2.default.createElement('nav', {
-        __source: {
-            fileName: _jsxFileName,
-            lineNumber: 106
-        }
-    }, _react2.default.createElement(_link2.default, { href: '/', __source: {
-            fileName: _jsxFileName,
-            lineNumber: 107
-        }
-    }, _react2.default.createElement('a', {
-        __source: {
-            fileName: _jsxFileName,
-            lineNumber: 107
-        }
-    }, '\u8AB2\u7A0B\u8868')), ' |', _react2.default.createElement(_link2.default, { href: '/donate', __source: {
-            fileName: _jsxFileName,
-            lineNumber: 108
-        }
-    }, _react2.default.createElement('a', {
-        __source: {
-            fileName: _jsxFileName,
-            lineNumber: 108
-        }
-    }, '\u5927\u5FB7\u7BB1')), ' |', _react2.default.createElement(_link2.default, { href: '/about', __source: {
-            fileName: _jsxFileName,
-            lineNumber: 109
-        }
-    }, _react2.default.createElement('a', {
-        __source: {
-            fileName: _jsxFileName,
-            lineNumber: 109
-        }
-    }, '\u806F\u7D61POLO'))), children)), _react2.default.createElement('footer', {
-        __source: {
-            fileName: _jsxFileName,
-            lineNumber: 117
-        }
-    }, 'I`m here to stay'));
+    }, children)));
 };

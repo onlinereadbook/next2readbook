@@ -48,7 +48,8 @@ class NavigationLink extends PureComponent {
         )
     }
 }
-export default ({ children, title = 'This is the default title' }) => {
+export default ({ children, title = '線上讀書會官方網站' }) => {
+
     const closeButton = (
         <Button
             icon
@@ -84,15 +85,25 @@ export default ({ children, title = 'This is the default title' }) => {
                             href='/'
                             leftIcon={<FontIcon>inbox</FontIcon>}
                             tileClassName='md-list-tile--mini'
-                            primaryText={'Root'}
+                            primaryText={'精彩課程表'}
                         />,
                         <ListItem
                             key='1'
                             component={NavigationLink}
-                            href='/non-existing-page'
+                            href='/donate'
                             leftIcon={<FontIcon>star</FontIcon>}
                             tileClassName='md-list-tile--mini'
-                            primaryText={'404 page'}
+                            primaryText={'贊助大德箱'}
+                        />
+                        ,
+                        <ListItem
+                            key='2'
+                            component={NavigationLink}
+                            href='/about'
+                            leftIcon={<FontIcon>star</FontIcon>}
+                            tileClassName='md-list-tile--mini'
+                            primaryText={'關於線上讀書會'}
+
                         />
                     ]}
                     contentClassName='md-grid'
@@ -100,23 +111,16 @@ export default ({ children, title = 'This is the default title' }) => {
                     mobileDrawerType={NavigationDrawer.DrawerTypes.TEMPORARY_MINI}
                     tabletDrawerType={NavigationDrawer.DrawerTypes.PERSISTENT_MINI}
                     desktopDrawerType={NavigationDrawer.DrawerTypes.PERSISTENT_MINI}
-                    toolbarTitle='Hello, World!'
+                    toolbarTitle={title}
                     toolbarActions={closeButton}
                 >
-                    <nav>
-                        <Link href='/'><a>課程表</a></Link> |
-        <Link href='/donate'><a>大德箱</a></Link> |
-        <Link href='/about'><a>聯絡POLO</a></Link>
-                    </nav>
+
                     {children}
                 </NavigationDrawer>
 
             </header>
 
 
-            <footer>
-                I`m here to stay
-    </footer>
         </div>
     )
 }
