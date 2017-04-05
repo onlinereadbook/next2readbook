@@ -1,0 +1,19 @@
+{
+  "name": "nextofficeweb",
+  "version": "1.0.0",
+  "description": "線上讀書會官網",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/onlinereadbook/next2readbook.git"
+  },
+  "author": "polo <polo13999@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/onlinereadbook/next2readbook/issues"
+  },
+  "homepage": "https://github.com/onlinereadbook/next2readbook#readme"
+}
