@@ -18,12 +18,15 @@
     "url": "https://github.com/onlinereadbook/next2readbook/issues"
   },
   "dependencies": {
+    "components": "^0.1.0",
+    "lorem-ipsum": "^1.0.3",
     "next": "*",
     "react": "^15.4.2",
     "react-addons-css-transition-group": "^15.4.2",
     "react-addons-transition-group": "^15.4.2",
     "react-dom": "^15.4.2",
-    "react-md": "^1.0.1"
+    "react-md": "^1.0.1",
+    "utils": "^0.3.1"
   },
   "homepage": "https://github.com/onlinereadbook/next2readbook#readme"
 }
