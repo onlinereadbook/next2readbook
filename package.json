@@ -4,7 +4,9 @@
   "description": "線上讀書會官網",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "next",
+    "build": "next build",
+    "start": "next start"
   },
   "repository": {
     "type": "git",
@@ -14,6 +16,14 @@
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/onlinereadbook/next2readbook/issues"
+  },
+  "dependencies": {
+    "next": "*",
+    "react": "^15.4.2",
+    "react-addons-css-transition-group": "^15.4.2",
+    "react-addons-transition-group": "^15.4.2",
+    "react-dom": "^15.4.2",
+    "react-md": "^1.0.1"
   },
   "homepage": "https://github.com/onlinereadbook/next2readbook#readme"
 }
