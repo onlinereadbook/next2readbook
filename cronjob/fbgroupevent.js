@@ -1,12 +1,18 @@
 var request = require('request');
-import Sequelize from 'sequelize';
-import { databaseUrl } from '../src/config';
-import Eventslist from '../src/data/models/Events';
+// import Sequelize from 'sequelize';
+// import { databaseUrl } from '../config';
+// import Eventslist from '../src/data/models/Events';
+var fs = require('mz/fs');
+
+
+
 
 
 let url = 'https://graph.facebook.com/v2.8/me?fields=id,name,events{id,start_time,description,owner,end_time,parent_group,name}'
 
-url = url + '&access_token=EAACEdEose0cBAOCR90V5uphAg0sZCbJOPxmncZBo8NfdIcKthSzaHgqrPcPau9gmkRKtqNI9ye0M0Ih2ZAtclZAhpsNFfXsTQYouxklW2lJ5Uyq5LPHZBPR9nfkZCRc0ZCanZBJqzvALFr3dCaCXXZAJyAnWn5TjnXPWZCJACNd4xV3faKa3LCCtgUZB5gp65Xt208ZD'
+url = url + '&access_token=EAACEdEose0cBAGwLZCYpWMpBOjvhzu1FzOaMtZCe92OMLcxAIcqxO0zNL0kyNcE7wxY0FjGPdymByO5aLYcbLczgmUiw7YC4WkVgBrsdluyHSxjXY3Nwo14Eh2dJooeUW3P0h5Ci7m1k7lLgrqZAj0fPY9zNOuqvtjpGBxPFuNClmSvZB5ZCeKbASBZA9ZBNQgZD'
+
+let alldata = [];
 
 go(url);
 async function go(url) {
@@ -31,8 +37,10 @@ async function go(url) {
                 data.parentGroupId = v.parent_group.id;
                 data.privacy = v.parent_group.privacy;
                 data.owner = v.owner.name;
-                Eventslist.build(data).save();
+                //  Eventslist.build(data).save();
             }
+            alldata.push(data);
+
             //console.log(typeof (v.parent_group));
         })
         //console.log(item.events);
@@ -66,10 +74,14 @@ async function go2(url) {
                 data.parentGroupId = v.parent_group.id;
                 data.privacy = v.parent_group.privacy;
                 data.owner = v.owner.name;
-                Eventslist.build(data).save();
+                // Eventslist.build(data).save();
             }
+            // alldata.push(data);
+
+            fs.writeFile('data/lessonDataTest.js', JSON.stringify(v));
             //console.log(typeof (v.parent_group));
         })
+
 
 
         if (next != "") {
@@ -77,6 +89,12 @@ async function go2(url) {
                 console.log('下一次的旅行');
                 go2(next);
             }, 5000);
+        } else {
+            console.log(alldata);
+
         }
     });
+
+
+
 }

@@ -18,13 +18,16 @@
   },
   "dependencies": {
     "components": "^0.1.0",
+    "fs": "0.0.1-security",
     "lorem-ipsum": "^1.0.3",
+    "mz": "^2.6.0",
     "next": "*",
     "react": "^15.4.2",
     "react-addons-css-transition-group": "^15.4.2",
     "react-addons-transition-group": "^15.4.2",
     "react-dom": "^15.4.2",
     "react-md": "^1.0.1",
+    "sequelize": "^3.30.4",
     "utils": "^0.3.1"
   },
   "homepage": "https://github.com/onlinereadbook/next2readbook#readme",
