@@ -96,9 +96,19 @@ export default ({ children, title = '線上讀書會官方網站' }) => {
                             tileClassName='md-list-tile--mini'
                             primaryText={'贊助大德箱'}
                         />
+                         ,
+                        <ListItem
+                            key='3'
+                            component={NavigationLink}
+                            href='/youtube'
+                            leftIcon={<FontIcon>subtitles</FontIcon>}
+                            tileClassName='md-list-tile--mini'
+                            primaryText={'精彩影片'}
+
+                        />
                         ,
                         <ListItem
-                            key='2'
+                            key='4'
                             component={NavigationLink}
                             href='/about'
                             leftIcon={<FontIcon>face</FontIcon>}

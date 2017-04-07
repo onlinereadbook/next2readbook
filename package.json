@@ -18,20 +18,27 @@
   },
   "dependencies": {
     "components": "^0.1.0",
+    "firebase": "^3.7.5",
+    "firebase-admin": "^4.2.0",
     "fs": "0.0.1-security",
     "lorem-ipsum": "^1.0.3",
+    "moment": "^2.18.1",
     "mz": "^2.6.0",
     "next": "*",
+    "nprogress": "^0.2.0",
     "react": "^15.4.2",
     "react-addons-css-transition-group": "^15.4.2",
     "react-addons-transition-group": "^15.4.2",
     "react-dom": "^15.4.2",
     "react-md": "^1.0.1",
+    "request-promise": "^4.2.0",
     "sequelize": "^3.30.4",
+    "sort-by": "^1.2.0",
     "utils": "^0.3.1"
   },
   "homepage": "https://github.com/onlinereadbook/next2readbook#readme",
   "devDependencies": {
+    "firebase": "^3.7.5",
     "node-sass": "^4.5.2",
     "sass-loader": "^6.0.3"
   }
