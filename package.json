@@ -24,7 +24,7 @@
     "lorem-ipsum": "^1.0.3",
     "moment": "^2.18.1",
     "mz": "^2.6.0",
-    "next": "*",
+    "next": "^2.1.0",
     "react": "^15.4.2",
     "react-addons-css-transition-group": "^15.4.2",
     "react-addons-transition-group": "^15.4.2",

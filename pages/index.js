@@ -1,4 +1,4 @@
-import Layout from '../components/layout'
+import Layout from '../components/layout';
 import React, { PureComponent } from 'react';
 import DataTable from 'react-md/lib/DataTables/DataTable';
 import TableHeader from 'react-md/lib/DataTables/TableHeader';
@@ -6,12 +6,12 @@ import TableBody from 'react-md/lib/DataTables/TableBody';
 import TableRow from 'react-md/lib/DataTables/TableRow';
 import TableColumn from 'react-md/lib/DataTables/TableColumn';
 import loremIpsum from 'lorem-ipsum';
-import lessonData from '../data/lessonData.json'
+import lessonData from '../data/lessonData.json';
 import Button from 'react-md/lib/Buttons';
 import moment from 'moment';
 import SelectField from 'react-md/lib/SelectFields';
-import groupdata from '../data/groupsimpleData.json'
-
+import groupdata from '../data/groupsimpleData.json';
+import Router from 'next/router';
 //let lessonData = [{ title: "1" }, { title: "2" }, { title: "3" }];
 //console.log(lessonData);
 const cn = 'md-table-column--adjusted';
@@ -23,21 +23,36 @@ const stateItems = [''].concat(groupdata);
 class PlainTableExample extends PureComponent {
     constructor(props) {
         super(props);
+        console.log(props);
         this.state = {
             stateLessonData: lessonData,
+            kind: props.kind
         }
+        // if (this.state.kind != "") {
+        //     // stateLessonData: lessonData.filter(function (v, i) {
+        //     //     // console.log(v.parentGroupId + "-");
+        //     //     //console.log(v.parentGroupId == value);
+        //     //     return v.parentGroupId == this.state.kind
+
+        //     // })
+        // }
     }
 
-    _handleChange = (value, index, event) => {
+
+
+    _handleChange = (kinddata, index, event) => {
         // console.log(value);
         // console.log(this.state.stateLessonData);
         let temp = [];
-        if (value != "") {
+        if (kinddata != "") {
+            const href = `/?kind=${kinddata}`
+            Router.push(href, href, { shallow: true })
+
             this.setState({
                 stateLessonData: lessonData.filter(function (v, i) {
                     // console.log(v.parentGroupId + "-");
                     //console.log(v.parentGroupId == value);
-                    return v.parentGroupId == value
+                    return v.parentGroupId == kinddata
 
                 })
             });
@@ -50,6 +65,9 @@ class PlainTableExample extends PureComponent {
 
     }
     render() {
+
+
+
 
         const rows = this.state.stateLessonData.map((_, i) => {
             let urldata = `https://www.facebook.com/groups/${_.parentGroupId}`;
@@ -100,8 +118,11 @@ class PlainTableExample extends PureComponent {
     }
 }
 
-export default () => (
-    <Layout>
-        <PlainTableExample></PlainTableExample>
-    </Layout>
-)
+export default (props) => {
+    //console.log(props);
+    return (
+        <Layout>
+            <PlainTableExample kind={props.url.query.kind}></PlainTableExample>
+        </Layout>
+    )
+}
