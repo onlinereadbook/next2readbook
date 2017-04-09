@@ -2,12 +2,24 @@ var request = require('request');
 // import Sequelize from 'sequelize';
 // import { databaseUrl } from '../src/config';
 // import GroupList from '../src/data/models/Group';
+var fs = require('fs');
+var admin = require("firebase-admin");
+var serviceAccount = require("../serviceAccountKey.json");
+
+var refreshToken;
+admin.initializeApp({
+    credential: admin.credential.cert(serviceAccount),
+    databaseURL: "https://macro-duality-160006.firebaseio.com"
+});
 
 
 let url = 'https://graph.facebook.com/v2.8/';
-url = url + 'me?fields=groups{email,name,owner,privacy,icon,cover,description}';
-url = url + '&access_token=EAACEdEose0cBALP5t5ZA3PGZAal3tUma42PTDQMzlAApzPG0FZBmEOn16IoZBbXHrhEBRSgT3nPnReGAoO0MSmYYQuAjg79lL26MqVLznkiRoI1auffhZBRceFZBPcYOaZAajKhvBX5yXKp9z54VCHieuU91VGaoBiMZBkujOpzZAEDiDXi14ZCfWsnYEvR8pstJ4ZD';
+url = url + 'me?fields=groups{id,email,name,owner,privacy,icon,cover,description}';
+url = url + '&access_token=EAACEdEose0cBAINrIvg9zbAzLEzkcwDN05SZCZBkMhAZBI41pw174Yt2Prh54Fz7Q4zcDOK7n82nqdsaX1VwNrzRxHyvRRGxy8FOAWIXO4tW750CV2ikSXLoF2m1fxs4zW7oGqZCha85ybSzWjaCFiIVgd9TuXX2aXTZAnceUUFss0LxY3uOkfXKhtUFtzZC4ZD';
 
+
+let alldata = [];
+let simpledata = [];
 go(url);
 async function go(url) {
     //console.log(url);
@@ -30,7 +42,10 @@ async function go(url) {
                     data.cover = '';
                 }
                 data.groupId = v.id;
-                GroupList.build(data).save();
+
+                simpledata.push({ "name": v.name, "id": v.id });
+                alldata.push(v);
+                //GroupList.build(data).save();
                 //                console.log(data);
             }
 
@@ -45,7 +60,13 @@ async function go(url) {
     });
 }
 async function go2(url) {
+    if (typeof (url) === "undefined") {
+        var userRef = admin.database().ref("allgroup/").set(alldata);
+        fs.writeFile('./data/groupData.json', JSON.stringify(alldata))
+        fs.writeFile('./data/groupsimpleData.json', JSON.stringify(simpledata))
 
+        return
+    }
     request(url, function (err, res, body) {
         let item = JSON.parse(body);
         //console.log(item.events.data);
@@ -66,7 +87,9 @@ async function go2(url) {
                 data.cover = '';
             }
             data.groupId = v.id;
-            GroupList.build(data).save();
+            simpledata.push({ "name": v.name, "id": v.id });
+            alldata.push(v);
+            //GroupList.build(data).save();
 
         })
 

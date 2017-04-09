@@ -4,11 +4,13 @@ import Head from 'next/head'
 import { PureComponent } from 'react'
 
 import Avatar from 'react-md/lib/Avatars'
-import Button from 'react-md/lib/Buttons/Button'
+import Button from 'react-md/lib/Buttons'
 import FontIcon from 'react-md/lib/FontIcons'
 import ListItem from 'react-md/lib/Lists/ListItem'
 import NavigationDrawer from 'react-md/lib/NavigationDrawers'
 import SelectField from 'react-md/lib/SelectFields'
+
+
 
 const avatarSrc = 'https://cloud.githubusercontent.com/assets/13041/19686250/971bf7f8-9ac0-11e6-975c-188defd82df1.png'
 
@@ -61,77 +63,80 @@ export default ({ children, title = '線上讀書會官方網站' }) => {
     </Button>
     )
 
-    return (
+    return (<div>
+        <Head>
+            <title>{title}</title>
+            <meta charSet='utf-8' />
+            <meta name='viewport' content='initial-scale=1.0, width=device-width' />
+
+            <link rel="stylesheet" href="//unpkg.com/react-md/dist/react-md.teal-yellow.min.css" />
+            <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto:300,400,500' />
+            <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Material+Icons' />
+        </Head>
 
 
+        <header>
+            <NavigationDrawer
+                navItems={[
+                    <ListItem
+                        key='0'
+                        component={NavigationLink}
+                        href='/'
+                        leftIcon={<FontIcon>inbox</FontIcon>}
+                        tileClassName='md-list-tile--mini'
+                        primaryText={'精彩課程表'}
+                    />,
+                    <ListItem
+                        key='1'
+                        component={NavigationLink}
+                        href='/donate'
+                        leftIcon={<FontIcon>star</FontIcon>}
+                        tileClassName='md-list-tile--mini'
+                        primaryText={'贊助讀書會'}
+                    />
+                    ,
+                    <ListItem
+                        key='3'
+                        component={NavigationLink}
+                        href='/youtube'
+                        leftIcon={<FontIcon>subtitles</FontIcon>}
+                        tileClassName='md-list-tile--mini'
+                        primaryText={'精彩影片'}
 
-        <div>
-            <Head>
-                <title>{title}</title>
-                <meta charSet='utf-8' />
-                <meta name='viewport' content='initial-scale=1.0, width=device-width' />
+                    />
+                    ,
+                    <ListItem
+                        key='4'
+                        component={NavigationLink}
+                        href='/about'
+                        leftIcon={<FontIcon>face</FontIcon>}
+                        tileClassName='md-list-tile--mini'
+                        primaryText={'關於線上讀書會'}
 
-                <link rel="stylesheet" href="//unpkg.com/react-md/dist/react-md.teal-yellow.min.css" />
-                <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto:300,400,500' />
-                <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Material+Icons' />
-            </Head>
+                    />
+                    ,
+                    <ListItem
+                        key='5'
+                        component={NavigationLink}
+                        href='/events'
+                        leftIcon={<FontIcon>face</FontIcon>}
+                        tileClassName='md-list-tile--mini'
+                        primaryText={'線上讀書會活動'}
 
+                    />
+                ]}
+                contentClassName='md-grid'
+                drawerHeaderChildren={drawerHeaderChildren}
+                mobileDrawerType={NavigationDrawer.DrawerTypes.TEMPORARY_MINI}
+                tabletDrawerType={NavigationDrawer.DrawerTypes.PERSISTENT_MINI}
+                desktopDrawerType={NavigationDrawer.DrawerTypes.PERSISTENT_MINI}
+                toolbarTitle={title}
+                toolbarActions={closeButton}
+            >
 
-            <header>
-                <NavigationDrawer
-                    navItems={[
-                        <ListItem
-                            key='0'
-                            component={NavigationLink}
-                            href='/'
-                            leftIcon={<FontIcon>inbox</FontIcon>}
-                            tileClassName='md-list-tile--mini'
-                            primaryText={'精彩課程表'}
-                        />,
-                        <ListItem
-                            key='1'
-                            component={NavigationLink}
-                            href='/donate'
-                            leftIcon={<FontIcon>star</FontIcon>}
-                            tileClassName='md-list-tile--mini'
-                            primaryText={'贊助大德箱'}
-                        />
-                         ,
-                        <ListItem
-                            key='3'
-                            component={NavigationLink}
-                            href='/youtube'
-                            leftIcon={<FontIcon>subtitles</FontIcon>}
-                            tileClassName='md-list-tile--mini'
-                            primaryText={'精彩影片'}
-
-                        />
-                        ,
-                        <ListItem
-                            key='4'
-                            component={NavigationLink}
-                            href='/about'
-                            leftIcon={<FontIcon>face</FontIcon>}
-                            tileClassName='md-list-tile--mini'
-                            primaryText={'關於線上讀書會'}
-
-                        />
-                    ]}
-                    contentClassName='md-grid'
-                    drawerHeaderChildren={drawerHeaderChildren}
-                    mobileDrawerType={NavigationDrawer.DrawerTypes.TEMPORARY_MINI}
-                    tabletDrawerType={NavigationDrawer.DrawerTypes.PERSISTENT_MINI}
-                    desktopDrawerType={NavigationDrawer.DrawerTypes.PERSISTENT_MINI}
-                    toolbarTitle={title}
-                    toolbarActions={closeButton}
-                >
-
-                    {children}
-                </NavigationDrawer>
-
-            </header>
-
-
-        </div>
+                {children}
+            </NavigationDrawer>
+        </header>
+    </div>
     )
 }

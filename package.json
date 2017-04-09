@@ -25,7 +25,6 @@
     "moment": "^2.18.1",
     "mz": "^2.6.0",
     "next": "*",
-    "nprogress": "^0.2.0",
     "react": "^15.4.2",
     "react-addons-css-transition-group": "^15.4.2",
     "react-addons-transition-group": "^15.4.2",
@@ -33,13 +32,13 @@
     "react-md": "^1.0.1",
     "request-promise": "^4.2.0",
     "sequelize": "^3.30.4",
-    "sort-by": "^1.2.0",
-    "utils": "^0.3.1"
+    "sort-by": "^1.2.0"
   },
   "homepage": "https://github.com/onlinereadbook/next2readbook#readme",
   "devDependencies": {
-    "firebase": "^3.7.5",
-    "node-sass": "^4.5.2",
-    "sass-loader": "^6.0.3"
+    "firebase": "^3.7.5"
+  },
+  "engines": {
+    "node": "7.8"
   }
 }
