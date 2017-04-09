@@ -23,19 +23,19 @@ const stateItems = [''].concat(groupdata);
 class PlainTableExample extends PureComponent {
     constructor(props) {
         super(props);
-        console.log(props);
         this.state = {
             stateLessonData: lessonData,
             kind: props.kind
         }
-        // if (this.state.kind != "") {
-        //     // stateLessonData: lessonData.filter(function (v, i) {
-        //     //     // console.log(v.parentGroupId + "-");
-        //     //     //console.log(v.parentGroupId == value);
-        //     //     return v.parentGroupId == this.state.kind
+        const initkind = props.kind;
+        //console.log(typeof (this.state.kind));
+        if (typeof (this.state.kind) != "undefined") {
+            //  console.log('test');
+            this.state.stateLessonData = lessonData.filter(function (v, i) {
+                return v.parentGroupId == initkind
 
-        //     // })
-        // }
+            })
+        }
     }
 
 
@@ -46,7 +46,7 @@ class PlainTableExample extends PureComponent {
         let temp = [];
         if (kinddata != "") {
             const href = `/?kind=${kinddata}`
-            Router.push(href, href, { shallow: true })
+            Router.push(href)
 
             this.setState({
                 stateLessonData: lessonData.filter(function (v, i) {
