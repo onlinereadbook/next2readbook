@@ -6,12 +6,23 @@ import TableBody from 'react-md/lib/DataTables/TableBody';
 import TableRow from 'react-md/lib/DataTables/TableRow';
 import TableColumn from 'react-md/lib/DataTables/TableColumn';
 import loremIpsum from 'lorem-ipsum';
-import lessonData from '../data/lessonData.json';
 import Button from 'react-md/lib/Buttons';
 import moment from 'moment';
 import SelectField from 'react-md/lib/SelectFields';
-import groupdata from '../data/groupsimpleData.json';
 import Router from 'next/router';
+
+import lessonData from '../data/lessonData.json';
+import groupdata from '../data/groupsimpleData.json';
+import { admin } from '../components/firebase';
+
+
+
+var allgroup = admin.database().ref("allgroup/");
+
+allgroup.once('value').then(function (snapshot) {
+    console.log(snapshot.val());
+}).catch(err => { console.log(err) });
+
 //let lessonData = [{ title: "1" }, { title: "2" }, { title: "3" }];
 //console.log(lessonData);
 const cn = 'md-table-column--adjusted';
