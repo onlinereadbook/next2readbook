@@ -69,7 +69,9 @@ export default ({ children, title = '線上讀書會官方網站' }) => {
             <meta charSet='utf-8' />
             <meta name='viewport' content='initial-scale=1.0, width=device-width' />
 
-            <link rel="stylesheet" href="//unpkg.com/react-md/dist/react-md.teal-yellow.min.css" />
+
+            <link rel="stylesheet" href="//unpkg.com/react-md/dist/react-md.teal-amber.min.css" />
+
             <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto:300,400,500' />
             <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Material+Icons' />
         </Head>

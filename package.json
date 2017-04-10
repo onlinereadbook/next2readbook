@@ -30,7 +30,6 @@
     "react-addons-transition-group": "^15.4.2",
     "react-dom": "^15.4.2",
     "react-md": "^1.0.1",
-    "request-promise": "^4.2.0",
     "sequelize": "^3.30.4",
     "sort-by": "^1.2.0"
   },
