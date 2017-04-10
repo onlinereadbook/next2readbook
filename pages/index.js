@@ -13,15 +13,15 @@ import Router from 'next/router';
 
 import lessonData from '../data/lessonData.json';
 import groupdata from '../data/groupsimpleData.json';
-import { admin } from '../components/firebase';
+// import { admin } from '../components/firebase';
 
 
 
-var allgroup = admin.database().ref("allgroup/");
+// var allgroup = admin.database().ref("allgroup/");
 
-allgroup.once('value').then(function (snapshot) {
-    console.log(snapshot.val());
-}).catch(err => { console.log(err) });
+// allgroup.once('value').then(function (snapshot) {
+//     console.log(snapshot.val());
+// }).catch(err => { console.log(err) });
 
 //let lessonData = [{ title: "1" }, { title: "2" }, { title: "3" }];
 //console.log(lessonData);
