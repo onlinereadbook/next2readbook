@@ -13,7 +13,11 @@ import Router from 'next/router';
 
 import lessonData from '../data/lessonData.json';
 import groupdata from '../data/groupsimpleData.json';
-// import { admin } from '../components/firebase';
+
+
+
+//console.log(admin)
+
 
 
 
@@ -32,6 +36,9 @@ const stateItems = [''].concat(groupdata);
 
 //console.log(stateItems);
 class PlainTableExample extends PureComponent {
+
+
+
     constructor(props) {
         super(props);
         this.state = {

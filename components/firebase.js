@@ -1,11 +1,15 @@
-var admin = require("firebase-admin");
-var serviceAccount = require("../serviceAccountKey.json");
+import admin from 'firebase-admin'
+import serviceAccount from '../serviceAccountKey.json'
 
-var refreshToken;
-admin.initializeApp({
-    credential: admin.credential.cert(serviceAccount),
-    databaseURL: "https://macro-duality-160006.firebaseio.com"
-});
+export default () => {
+
+    admin.initializeApp({
+        credential: admin.credential.cert(serviceAccount),
+        databaseURL: "https://macro-duality-160006.firebaseio.com"
+    });
+    return admin;
+
+}
 //console.log(admin)
 
-export default admin;
+

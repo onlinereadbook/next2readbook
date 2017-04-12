@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "description": "線上讀書會官網",
   "scripts": {
-    "dev": "next",
+    "dev": "node server.js",
     "build": "next build",
-    "start": "next start"
+    "start": "NODE_ENV=production node server.js"
   },
   "repository": {
     "type": "git",
@@ -18,20 +18,31 @@
   },
   "dependencies": {
     "components": "^0.1.0",
+    "dgram": "^1.0.1",
+    "dns": "^0.2.2",
+    "express": "^4.15.2",
     "firebase": "^3.7.5",
     "firebase-admin": "^4.2.0",
+    "firebase-token-generator": "^2.0.0",
     "fs": "0.0.1-security",
+    "isomorphic-fetch": "^2.2.1",
+    "koa": "^2.2.0",
+    "koa-json": "^2.0.2",
+    "koa-router": "^7.1.1",
     "lorem-ipsum": "^1.0.3",
     "moment": "^2.18.1",
     "mz": "^2.6.0",
+    "net": "^1.0.2",
     "next": "^2.1.0",
-    "react": "^15.4.2",
+    "react": "^15.5.3",
     "react-addons-css-transition-group": "^15.4.2",
     "react-addons-transition-group": "^15.4.2",
     "react-dom": "^15.4.2",
     "react-md": "^1.0.1",
+    "request": "^2.81.0",
     "sequelize": "^3.30.4",
-    "sort-by": "^1.2.0"
+    "sort-by": "^1.2.0",
+    "tls": "0.0.1"
   },
   "homepage": "https://github.com/onlinereadbook/next2readbook#readme",
   "devDependencies": {
