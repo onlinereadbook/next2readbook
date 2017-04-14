@@ -20,10 +20,11 @@ const cn = 'md-table-column--adjusted';
 export default class YoutubeTable extends PureComponent {
     constructor(props) {
         super(props);
-        console.log('---1');
-        console.log(this.props);
-        console.log('---2');
-        console.log(youtubeData);
+        // console.log('---1');
+        // console.log(Object.values(this.props.youtubedata));
+        // console.log('---2');
+        // console.log(youtubeData);
+        let youtubeData = Object.values(this.props.youtubedata);
         //let youtubeData = JSON.prase(this.props.youtubedata);
         //youtubeData = Object.values(this.props.youtubedata);
         //console.log(youtubeData);
@@ -36,13 +37,12 @@ export default class YoutubeTable extends PureComponent {
     render() {
 
         const rows = youtubeData.map((_, i) => {
-            let hrefdata = `https://www.youtube.com/watch?v=${_.snippet.videoId}`;
+            let hrefdata = `https://www.youtube.com/watch?v=${_.id.videoId}`;
             return (
                 <TableRow key={i} >
-                    <TableColumn >   {moment(_.snippet.publishedAt).format("YYYY-MM-DD HH:mm")}             </TableColumn>
+                    <TableColumn >   {moment(_.snippet.publishedAt).format("YYYY-MM-DD HH:mm")}</TableColumn>
                     <TableColumn  >    {_.snippet.title}             </TableColumn>
-                    <TableColumn >  <Button raised href={hrefdata} label={_.snippet.description} />     </TableColumn>
-
+                    <TableColumn >  <Button raised href={hrefdata} label={_.snippet.description} /></TableColumn>
                 </TableRow>
             )
         }

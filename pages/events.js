@@ -31,6 +31,7 @@ export default class Events extends React.Component {
     render() {
         return (
             <Layout title="精彩活動列表">
+
                 <EventTable kind={this.props.url.query.kind}
                     listgroup={this.props.listgroup}
                     eventdata={this.props.eventdata}

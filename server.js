@@ -47,14 +47,12 @@ app.prepare()
         server.get('/eventdata', (req, res) => {
             res.end(JSON.stringify(lessonData));
         })
-
         server.get('/youtubedata', (req, res) => {
-
             var userRef2 = admin.database().ref("/youtube");
             userRef2.once('value').then(function (snapshot) {
                 let youtube = snapshot.val();
                 const result = allgroup = JSON.stringify(youtube);
-                console.log(result);
+                //console.log(result);
                 console.log('server get youtube');
                 res.end(result);
 
@@ -62,7 +60,7 @@ app.prepare()
 
 
 
-            res.end(JSON.stringify(lessonData));
+            // res.end(JSON.stringify(lessonData));
         })
 
         server.get('*', (req, res) => {
