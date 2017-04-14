@@ -31,7 +31,7 @@ const drawerHeaderChildren = [
         className='md-select-field--toolbar'
     />
 ]
-class NavigationLink extends PureComponent {
+class NavigationLink extends React.Component {
     // NOTE: Don't try using Stateless (function) component here. `ref` is
     // required by React-MD/AccessibleFakeButton, but Stateless components
     // don't have one by design:

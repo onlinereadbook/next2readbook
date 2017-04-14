@@ -1,8 +1,20 @@
 import Layout from '../components/layout'
-import React from 'react';
-export default () => (
-    <Layout title='線上精彩活動'>
-        <div className="md-grid">
-        </div>
-    </Layout>
-);
+import React, { PureComponent } from 'react';
+import eventTable from '../components/eventTable'
+//import test from '../components/test'
+
+class Test2 extends PureComponent {
+    constructor(props) {
+        super(props);
+    }
+    render() {
+        return (<div>sss</div>)
+    }
+}
+
+export default (props) => {
+    return (
+        <div>  <Test2 /> </div>
+    )
+
+}
