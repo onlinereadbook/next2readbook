@@ -39,7 +39,7 @@ let url = `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=
 var userRef = admin.database().ref("youtube/");
 
 userRef.once('value').then(function (snapshot) {
- 
+
     getdetail(snapshot.val());
 
 }).catch(err => { console.log(err) });
@@ -50,27 +50,25 @@ userRef.once('value').then(function (snapshot) {
 async function getdetail(Youtubedata) {
     //let Youtubedata = await Youtubelist.findAll({});
     //console.log(Youtubedata);
-    
-     //Youtubedata= JSON. (Youtubedata);
+
+    //Youtubedata= JSON. (Youtubedata);
     // console.log(typeof(Youtubedata));
-    let data=Object.values(Youtubedata);
+    let data = Object.values(Youtubedata);
     //console.log(data);
-       data.forEach(async (v,i) => {
-          console.log(v.id.videoId);
-     let url2 = `https://www.googleapis.com/youtube/v3/videos?part=snippet&id=${v.id.videoId}&key=${YOUR_API_KEY}`;
-     //console.log(url2);
-      let temp = await request(url2);
-          temp = JSON.parse(temp);
+    data.forEach(async (v, i) => {
+        console.log(v.id.videoId);
+        let url2 = `https://www.googleapis.com/youtube/v3/videos?part=snippet&id=${v.id.videoId}&key=${YOUR_API_KEY}`;
+        //console.log(url2);
+        let temp = await request(url2);
+        temp = JSON.parse(temp);
 
-        if(typeof(temp.items[0].snippet.tags)==="object"){
-         let tags = temp.items[0].snippet.tags.toString();
-        
-
-          admin.database().ref("youtube/"+v.id.videoId+"/tag").set(tags);
+        if (typeof (temp.items[0].snippet.tags) === "object") {
+            let tags = temp.items[0].snippet.tags.toString();
+            admin.database().ref("youtube/" + v.id.videoId + "/tag").set(tags);
         }
-    // //     // v.tags = tags;
-    // //     // v.save();
-      });
+        // //     // v.tags = tags;
+        // //     // v.save();
+    });
 
 
 }

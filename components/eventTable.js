@@ -11,44 +11,45 @@ import moment from 'moment';
 import SelectField from 'react-md/lib/SelectFields';
 import Router from 'next/router';
 import lessonData from '../data/lessonData.json';
-import groupdata from '../data/groupsimpleData.json';
 
-
-
-export default class eventTable extends React.Component {
+//console.log(stateItems);
+export default class EventTable extends React.Component {
     constructor(props) {
         super(props);
+        let stateItems = JSON.parse(props.listgroup);
+        stateItems = [''].concat(stateItems);
+
         this.state = {
             stateLessonData: lessonData,
-            kind: props.kind
+            kind: props.kind,
+            stateItems: stateItems
         }
+        //console.log('----');
+        console.log(this.state.stateItems);
+
+
         const initkind = props.kind;
+
         //console.log(typeof (this.state.kind));
         if (typeof (this.state.kind) != "undefined") {
             //  console.log('test');
             this.state.stateLessonData = lessonData.filter(function (v, i) {
                 return v.parentGroupId == initkind
-
             })
         }
     }
-
-
-
     _handleChange = (kinddata, index, event) => {
         // console.log(value);
         // console.log(this.state.stateLessonData);
         let temp = [];
         if (kinddata != "") {
-            const href = `/?kind=${kinddata}`
+            const href = `/events?kind=${kinddata}`
             Router.push(href)
-
             this.setState({
                 stateLessonData: lessonData.filter(function (v, i) {
                     // console.log(v.parentGroupId + "-");
                     //console.log(v.parentGroupId == value);
                     return v.parentGroupId == kinddata
-
                 })
             });
         } else {
@@ -84,7 +85,7 @@ export default class eventTable extends React.Component {
                     id="statesControlled"
                     label="請選擇要搜尋的社團"
                     placeholder="Some State"
-                    menuItems={stateItems}
+                    menuItems={this.state.stateItems}
                     onChange={this._handleChange}
                     className="md-cell"
                     itemLabel="name"
@@ -92,7 +93,6 @@ export default class eventTable extends React.Component {
                 />
 
                 <DataTable plain >
-
                     <TableHeader>
                         <TableRow autoAdjust={true} >
                             <TableColumn>時間</TableColumn>

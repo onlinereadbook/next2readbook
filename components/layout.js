@@ -90,7 +90,7 @@ export default ({ children, title = '線上讀書會官方網站' }) => {
                         key='1'
                         component={NavigationLink}
                         href='/donate'
-                        leftIcon={<FontIcon>star</FontIcon>}
+                        leftIcon={<FontIcon>favorite</FontIcon>}
                         tileClassName='md-list-tile--mini'
                         primaryText={'贊助讀書會'}
                     />
@@ -99,7 +99,7 @@ export default ({ children, title = '線上讀書會官方網站' }) => {
                         key='3'
                         component={NavigationLink}
                         href='/youtube'
-                        leftIcon={<FontIcon>subtitles</FontIcon>}
+                        leftIcon={<FontIcon>movie</FontIcon>}
                         tileClassName='md-list-tile--mini'
                         primaryText={'精彩影片'}
 
@@ -119,7 +119,7 @@ export default ({ children, title = '線上讀書會官方網站' }) => {
                         key='5'
                         component={NavigationLink}
                         href='/events'
-                        leftIcon={<FontIcon>face</FontIcon>}
+                        leftIcon={<FontIcon>today</FontIcon>}
                         tileClassName='md-list-tile--mini'
                         primaryText={'線上讀書會活動'}
 
@@ -129,7 +129,7 @@ export default ({ children, title = '線上讀書會官方網站' }) => {
                         key='6'
                         component={NavigationLink}
                         href='/test'
-                        leftIcon={<FontIcon>face</FontIcon>}
+                        leftIcon={<FontIcon>build</FontIcon>}
                         tileClassName='md-list-tile--mini'
                         primaryText={'test'}
 

@@ -2,9 +2,15 @@ const express = require('express')
 const next = require('next')
 const admin = require("firebase-admin");
 const serviceAccount = require("./serviceAccountKey.json");
-console.log('serviceAccount');
-console.log(typeof (serviceAccount));
+//console.log('serviceAccount');
+//console.log(typeof (serviceAccount));
+
+const lessonData = require('./data/lessonData.json');
+const groupdata = require('./data/groupsimpleData.json');
+
+
 const dev = process.env.NODE_ENV !== 'production'
+
 const app = next({
     dev
 })
@@ -20,26 +26,43 @@ admin.initializeApp({
 app.prepare()
     .then(() => {
         const server = express()
-
-        server.get('/firebase', (req, res) => {
+        server.get('/database', (req, res) => {
             // server.response()
+            //吃firebase寫法            
+            // var userRef = admin.database().ref("/allgroup");
+            // userRef.once('value').then(function (snapshot) {
+            //     let allgroup = snapshot.val();
+            //     const result = allgroup = JSON.stringify(allgroup);
+            //     //data = '{ "xxx": "xxx" }';
+            //     res.end(result);
 
+            // }).catch(err => { console.log(err) });
 
-            var userRef = admin.database().ref("/allgroup");
+            //直接吐json
 
-            userRef.once('value').then(function (snapshot) {
-                let allgroup = snapshot.val();
-                //res.end(allgroup);  
-                const result = allgroup = JSON.stringify(allgroup);
-                //data = '{ "xxx": "xxx" }';
+            res.end(JSON.stringify(groupdata));
+            //console.log(getdata);
+        })
+
+        server.get('/eventdata', (req, res) => {
+            res.end(JSON.stringify(lessonData));
+        })
+
+        server.get('/youtubedata', (req, res) => {
+
+            var userRef2 = admin.database().ref("/youtube");
+            userRef2.once('value').then(function (snapshot) {
+                let youtube = snapshot.val();
+                const result = allgroup = JSON.stringify(youtube);
+                console.log(result);
+                console.log('server get youtube');
                 res.end(result);
 
             }).catch(err => { console.log(err) });
-            //console.log(getdata);
 
 
 
-
+            res.end(JSON.stringify(lessonData));
         })
 
         server.get('*', (req, res) => {

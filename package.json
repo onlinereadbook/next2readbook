@@ -40,6 +40,7 @@
     "react-dom": "^15.4.2",
     "react-md": "^1.0.1",
     "request": "^2.81.0",
+    "request-promise": "^4.2.0",
     "sequelize": "^3.30.4",
     "sort-by": "^1.2.0",
     "tls": "0.0.1"
