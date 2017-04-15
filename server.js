@@ -4,9 +4,19 @@ const admin = require("firebase-admin");
 const serviceAccount = require("./serviceAccountKey.json");
 //console.log('serviceAccount');
 //console.log(typeof (serviceAccount));
+var bluebird = require('bluebird');
+var redis = require("redis");
+bluebird.promisifyAll(redis.RedisClient.prototype);
+bluebird.promisifyAll(redis.Multi.prototype);
+client = redis.createClient();
 
 const lessonData = require('./data/lessonData.json');
 const groupdata = require('./data/groupsimpleData.json');
+client.set('lessonData', JSON.stringify(lessonData));
+client.set('groupdata', JSON.stringify(groupdata));
+client.on("error", function (err) {
+    console.log("Error " + err);
+});
 
 
 const dev = process.env.NODE_ENV !== 'production'
@@ -44,7 +54,8 @@ app.prepare()
             //console.log(getdata);
         })
 
-        server.get('/eventdata', (req, res) => {
+        server.get('/eventdata/:page', (req, res) => {
+
             res.end(JSON.stringify(lessonData));
         })
         server.get('/youtubedata', (req, res) => {

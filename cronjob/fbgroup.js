@@ -5,6 +5,16 @@ var request = require('request');
 var fs = require('fs');
 var admin = require("firebase-admin");
 var serviceAccount = require("../serviceAccountKey.json");
+ 
+var mongoose = require('bluebird').promisifyAll(require('mongoose'));
+mongoose.connect('mongodb://localhost/readbook');
+mongoose.Promise = require('bluebird');
+var groupSchema=require('../models/groupSchema');
+var groupＭodel = mongoose.model('groupSchema', groupSchema);
+
+groupＭodel.remove({},()=>{
+    console.log('remove finish');
+})
 
 var refreshToken;
 admin.initializeApp({
@@ -15,7 +25,7 @@ admin.initializeApp({
 
 let url = 'https://graph.facebook.com/v2.8/';
 url = url + 'me?fields=groups{id,email,name,owner,privacy,icon,cover,description}';
-url = url + '&access_token=EAACEdEose0cBAINrIvg9zbAzLEzkcwDN05SZCZBkMhAZBI41pw174Yt2Prh54Fz7Q4zcDOK7n82nqdsaX1VwNrzRxHyvRRGxy8FOAWIXO4tW750CV2ikSXLoF2m1fxs4zW7oGqZCha85ybSzWjaCFiIVgd9TuXX2aXTZAnceUUFss0LxY3uOkfXKhtUFtzZC4ZD';
+url = url + '&access_token=EAACEdEose0cBAHETmYgnIO0ItAjKXjZBAR5JdnZCcl42LvZBPijW5vZBWpwEi3aOiXhHh70Aa2cgRz7CsVZA982apWED8sQoa5u1mPZBBDVX2ZBZAYZBcE0JvEjraJTxwiZAZCMW3jzZC89hW6tezwnzvZByVXTz9fqqWRjUYIVb49urB8N9QoKKw1LNibZBrfZCpDfe9EZD';
 
 
 let alldata = [];
@@ -61,9 +71,21 @@ async function go(url) {
 }
 async function go2(url) {
     if (typeof (url) === "undefined") {
-        var userRef = admin.database().ref("allgroup/").set(alldata);
-        fs.writeFile('./data/groupData.json', JSON.stringify(alldata))
-        fs.writeFile('./data/groupsimpleData.json', JSON.stringify(simpledata))
+        // var userRef = admin.database().ref("allgroup/").set(alldata);
+        // fs.writeFile('./data/groupData.json', JSON.stringify(alldata))
+        // fs.writeFile('./data/groupsimpleData.json', JSON.stringify(simpledata))
+        alldata.forEach((v, i) => {
+            let obj = {};
+            obj.id = v.id;
+            obj.name = v.name;
+            obj.icon = v.cover.source;
+            let data = new groupＭodel(obj);
+            data.save()
+
+        })
+
+
+
 
         return
     }

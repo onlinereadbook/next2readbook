@@ -3,12 +3,25 @@ var request = require('request');
 // import { databaseUrl } from '../src/config';
 // import Eventslist from '../src/data/models/Events';
 var fs = require('fs');
+var mongoose = require('bluebird').promisifyAll(require('mongoose'));
+mongoose.connect('mongodb://localhost/readbook');
+mongoose.Promise = require('bluebird');
+var groupEventSchema=require('../models/groupEventSchema');
+var groupEventＭodel = mongoose.model('groupEventSchema', groupEventSchema);
+
+groupEventＭodel.remove({},()=>{
+    console.log('remove finish');
+})
+
 
 let url = 'https://graph.facebook.com/v2.8/me?fields=id,name,events.limit(100){id,start_time,description,owner,end_time,parent_group,name}'
-
-url = url + '&access_token=EAACEdEose0cBABTnmWaWbXgXlpH1JnUOw6lOZBdeORQFdpAqbgNUOSa3aMs8ibfROfgMB5RiwDZCZAzMm6hogCeATtw8AYFcsTNFry7hGx6WbsJ8jlBDnDHY7sMXtk0zOJ68EEjSNK6MNZCzVE9IjVq4fP5NjpAiYbysYMAjCVUWr95GpGdHMlFrdoSpK2UZD'
-
+url = url + '&access_token=EAACEdEose0cBAGQzQe4XutbBsT6YvToYBTZAxukEaCOcZBAxTRXIMXvHe9WTNu4Us0dOaFE3u67VSAFrEuslUjiEISUg2uY7joULAmMe7GO8EJtza6HW5Bq4kYAPtySmc00miM1ZCwtj7YPFTD8Hprhz6JkdL7zNeT9A0ZA1nLNoMmZAfxwFuBrXZAW7hzgkgZD'
 let alldata = [];
+
+
+
+
+
 
 go(url);
 async function go(url) {
@@ -54,9 +67,20 @@ async function go(url) {
 async function go2(url) {
     console.log("url:" + url);
     if (typeof (url) === "undefined") {
-        console.log("最後一筆");
-        console.log(alldata);
-        fs.writeFile("data/lessonData.json", JSON.stringify(alldata));
+         console.log("最後一筆");
+        // console.log(alldata);
+        // fs.writeFile("data/lessonData.json", JSON.stringify(alldata));
+           
+            alldata.forEach((v, i) => {
+            let obj = {};
+            obj.id = v.id;
+            obj.name = v.name;
+            obj.icon = v.cover.source;
+            let data = new groupEventＭodel(obj);
+            console.log(data);
+            data.save()
+
+        })
         return
     }
     request(url, function (err, res, body) {

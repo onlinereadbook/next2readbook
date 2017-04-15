@@ -17,6 +17,7 @@
     "url": "https://github.com/onlinereadbook/next2readbook/issues"
   },
   "dependencies": {
+    "bluebird": "^3.5.0",
     "components": "^0.1.0",
     "dgram": "^1.0.1",
     "dns": "^0.2.2",
@@ -31,6 +32,7 @@
     "koa-router": "^7.1.1",
     "lorem-ipsum": "^1.0.3",
     "moment": "^2.18.1",
+    "mongoose": "^4.9.4",
     "mz": "^2.6.0",
     "net": "^1.0.2",
     "next": "^2.1.0",
@@ -39,6 +41,7 @@
     "react-addons-transition-group": "^15.4.2",
     "react-dom": "^15.4.2",
     "react-md": "^1.0.1",
+    "redis": "^2.7.1",
     "request": "^2.81.0",
     "request-promise": "^4.2.0",
     "sequelize": "^3.30.4",
