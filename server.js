@@ -8,15 +8,14 @@ var bluebird = require('bluebird');
 var redis = require("redis");
 bluebird.promisifyAll(redis.RedisClient.prototype);
 bluebird.promisifyAll(redis.Multi.prototype);
-client = redis.createClient();
 
 const lessonData = require('./data/lessonData.json');
 const groupdata = require('./data/groupsimpleData.json');
-client.set('lessonData', JSON.stringify(lessonData));
-client.set('groupdata', JSON.stringify(groupdata));
-client.on("error", function (err) {
-    console.log("Error " + err);
-});
+
+
+var mongoose = require('bluebird').promisifyAll(require('mongoose'));
+mongoose.connect('mongodb://localhost/readbook');
+mongoose.Promise = require('bluebird');
 
 
 const dev = process.env.NODE_ENV !== 'production'
@@ -58,16 +57,24 @@ app.prepare()
 
             res.end(JSON.stringify(lessonData));
         })
-        server.get('/youtubedata', (req, res) => {
-            var userRef2 = admin.database().ref("/youtube");
-            userRef2.once('value').then(function (snapshot) {
-                let youtube = snapshot.val();
-                const result = allgroup = JSON.stringify(youtube);
-                //console.log(result);
-                console.log('server get youtube');
-                res.end(result);
+        server.get('/youtubedata/:page', async (req, res) => {
+            const youtubeSchema = require('./models/youtubeSchema');
+            const youtubeＭodel = mongoose.model('youtubeSchema', youtubeSchema);
+            let data = await youtubeＭodel.find({}).limit(10).skip(req.params.page * 10);
+            //console.log(data);
 
-            }).catch(err => { console.log(err) });
+            res.json(data);
+            //res.end(data);
+            //firebase  寫法
+            // var userRef2 = admin.database().ref("/youtube");
+            // userRef2.once('value').then(function (snapshot) {
+            //     let youtube = snapshot.val();
+            //     const result = allgroup = JSON.stringify(youtube);
+            //     //console.log(result);
+            //     console.log('server get youtube');
+            //     res.end(result);
+
+            // }).catch(err => { console.log(err) });
 
 
 

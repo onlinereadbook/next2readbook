@@ -5,11 +5,12 @@ import 'isomorphic-fetch'
 
 
 export default class Youtube extends PureComponent {
-    static async getInitialProps() {
-        const res = await fetch('http://localhost:3000/youtubedata');
+    static async getInitialProps({ query: { page } }) {
+        page = (page == "undefined") ? 0 : page;
+        const res = await fetch(`http://localhost:3000/youtubedata/${page}`);
         const json = await res.json();
-        // console.log('getting data');
-        // console.log(json);
+        //console.log(page);
+        //console.log(json);
         return { 'youtubedata': json }
     }
 

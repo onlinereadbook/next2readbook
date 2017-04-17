@@ -11,6 +11,18 @@ admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
     databaseURL: "https://macro-duality-160006.firebaseio.com"
 });
+
+var mongoose = require('bluebird').promisifyAll(require('mongoose'));
+mongoose.connect('mongodb://localhost/readbook');
+mongoose.Promise = require('bluebird');
+var youtubeSchema = require('../models/youtubeSchema');
+var youtubeＭodel = mongoose.model('youtubeSchema', youtubeSchema);
+
+youtubeＭodel.remove({}, () => {
+    console.log('remove finish');
+})
+
+
 //console.log(admin)
 
 //測試寫入資料
@@ -46,6 +58,11 @@ let url = `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=
 //console.log(url);
 let alldata = [];
 
+youtubeＭodel.remove({}, () => {
+    console.log('remove finish');
+})
+
+
 first(url);
 function first(url) {
 
@@ -62,14 +79,17 @@ function first(url) {
         data.items.forEach(function (value, id) {
             //  console.log(value);
             // console.log('----');
-            let data2 = {};
+            let obj = {};
             //     //console.log(value.snippet);
             //     //console.log(value.snippet.title);
             //     //console.log(value.snippet.description);
-            data2.title = value.snippet.title;
-            data2.description = value.snippet.description;
-            data2.videoId = value.id.videoId;
-            data2.publishedAt = value.snippet.publishedAt;
+            obj.title = value.snippet.title;
+            obj.description = value.snippet.description;
+            //console.log(isNaN(value.contentDetails.upload.videoId));
+            obj.videoId = value.id.videoId;
+            obj.publishedAt = value.snippet.publishedAt;
+            let data = new youtubeＭodel(obj);
+            data.save()
             //console.log(value.id.videoId);
             //     data2.videoId = value.contentDetails.upload.videoId;
             //     //   console.log(value.snippet.thumbnails.default.url);
@@ -77,8 +97,8 @@ function first(url) {
             //     //data.title = value.snippet.title;
 
             //   Youtubelist.build(data2).save();
-            admin.database().ref('youtube/' + value.id.videoId).set(value);
-            alldata.push(data2);
+            // admin.database().ref('youtube/' + value.id.videoId).set(value);
+            // alldata.push(data2);
         })
         // // }
         // // fs.writeFile('xx.json', arr);
@@ -115,17 +135,18 @@ async function gonext(Token) {
         }
 
         data.items.forEach(function (value, id) {
-            let data2 = {};
-            data2.title = value.snippet.title;
-            data2.description = value.snippet.description;
+            let obj = {};
+            obj.title = value.snippet.title;
+            obj.description = value.snippet.description;
             //console.log(isNaN(value.contentDetails.upload.videoId));
-            data2.videoId = value.id.videoId;
-            data2.publishedAt = value.snippet.publishedAt;
+            obj.videoId = value.id.videoId;
+            obj.publishedAt = value.snippet.publishedAt;
             //  data2.videoId = (typeof (value.contentDetails.upload) == "object") ? value.contentDetails.upload.videoId : "";
             //Youtubelist.build(data2).save();
-            admin.database().ref('youtube/' + value.id.videoId).set(value);
-
-            alldata.push(data2);
+            // admin.database().ref('youtube/' + value.id.videoId).set(value);
+            let data = new youtubeＭodel(obj);
+            data.save()
+            //alldata.push(data2);
         })
         // }
         if (Token != "") {
