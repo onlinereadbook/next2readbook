@@ -13,14 +13,6 @@ export default (props) => {
     return (
         <Layout>
             <div> 首頁</div>
-
-
-
-
-
-
-
-
         </Layout>
     )
 }

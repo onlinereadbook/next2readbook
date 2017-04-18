@@ -124,16 +124,8 @@ export default ({ children, title = '線上讀書會官方網站' }) => {
                         primaryText={'線上讀書會活動'}
 
                     />
-                    ,
-                    <ListItem
-                        key='6'
-                        component={NavigationLink}
-                        href='/test'
-                        leftIcon={<FontIcon>build</FontIcon>}
-                        tileClassName='md-list-tile--mini'
-                        primaryText={'test'}
 
-                    />
+
                 ]}
                 contentClassName='md-grid'
                 drawerHeaderChildren={drawerHeaderChildren}

@@ -53,14 +53,29 @@ app.prepare()
             //console.log(getdata);
         })
 
-        server.get('/eventdata/:page', (req, res) => {
+        server.get('/eventdata/:start', (req, res) => {
 
             res.end(JSON.stringify(lessonData));
         })
-        server.get('/youtubedata/:page', async (req, res) => {
+
+        server.get('/youtubetotal', async (req, res) => {
             const youtubeSchema = require('./models/youtubeSchema');
             const youtubeＭodel = mongoose.model('youtubeSchema', youtubeSchema);
-            let data = await youtubeＭodel.find({}).limit(10).skip(req.params.page * 10);
+            var youtubetotal = await youtubeＭodel.count({});
+            console.log('Count is ' + youtubetotal);
+            res.end(JSON.stringify(youtubetotal));
+
+
+        });
+        server.get('/youtubedata/:start/:rowsPerPage', async (req, res) => {
+            // console.log(req.params.start);
+            let start = (typeof (req.params.start) == "undefined") ? 0 : req.params.start * 1;
+            let rowsPerPage = (typeof (req.params.rowsPerPage) == "undefined") ? 10 : req.params.rowsPerPage * 1;
+            console.log(rowsPerPage);
+            const youtubeSchema = require('./models/youtubeSchema');
+            const youtubeＭodel = mongoose.model('youtubeSchema', youtubeSchema);
+
+            let data = await youtubeＭodel.find({}).limit(rowsPerPage).skip(start * 1).sort({ publishedAt: -1 });
             //console.log(data);
 
             res.json(data);
@@ -82,6 +97,7 @@ app.prepare()
         })
 
         server.get('*', (req, res) => {
+            //req.req.data=''; //<-- url
             return handle(req, res)
         })
 

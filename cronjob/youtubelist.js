@@ -88,8 +88,11 @@ function first(url) {
             //console.log(isNaN(value.contentDetails.upload.videoId));
             obj.videoId = value.id.videoId;
             obj.publishedAt = value.snippet.publishedAt;
-            let data = new youtubeＭodel(obj);
-            data.save()
+
+            if (typeof (value.id.videoId) !== "undefined") {
+                let data = new youtubeＭodel(obj);
+                data.save()
+            }
             //console.log(value.id.videoId);
             //     data2.videoId = value.contentDetails.upload.videoId;
             //     //   console.log(value.snippet.thumbnails.default.url);
@@ -144,8 +147,10 @@ async function gonext(Token) {
             //  data2.videoId = (typeof (value.contentDetails.upload) == "object") ? value.contentDetails.upload.videoId : "";
             //Youtubelist.build(data2).save();
             // admin.database().ref('youtube/' + value.id.videoId).set(value);
-            let data = new youtubeＭodel(obj);
-            data.save()
+            if (typeof (value.id.videoId) !== "undefined") {
+                let data = new youtubeＭodel(obj);
+                data.save()
+            }
             //alldata.push(data2);
         })
         // }

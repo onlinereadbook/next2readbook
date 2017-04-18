@@ -5,7 +5,6 @@ import 'isomorphic-fetch'
 
 
 export default class Events extends React.Component {
-
     static async getInitialProps() {
         const res = await fetch('http://localhost:3000/database');
         const json = await res.json();
@@ -20,7 +19,7 @@ export default class Events extends React.Component {
 
         const data = JSON.stringify(listgroup);
 
-        const res2 = await fetch('http://localhost:3000/eventdata');
+        const res2 = await fetch('http://localhost:3000/eventdata/0');
         const eventdata = await res2.json();
         //console.log(json);
         //   console.log(listgroup);
@@ -31,12 +30,10 @@ export default class Events extends React.Component {
     render() {
         return (
             <Layout title="精彩活動列表">
-
                 <EventTable kind={this.props.url.query.kind}
                     listgroup={this.props.listgroup}
                     eventdata={this.props.eventdata}
                 />
-
             </Layout>
         )
     }
