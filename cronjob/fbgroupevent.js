@@ -15,7 +15,7 @@ groupEventＭodel.remove({}, () => {
 
 
 let url = 'https://graph.facebook.com/v2.8/me?fields=id,name,events.limit(100){id,start_time,description,owner,end_time,parent_group,name}'
-url = url + '&access_token=EAACEdEose0cBAC6ui2ZAIE2UsoFcvuETrZCi7m5iRMCzH89aLCXSERl7mid3n9UGNIZBRbrFSozT3ZCuaNyYwJEN4GomVkrTALZApyk9lHPRjUS5N0yOgeWoWY8exped4Nw1VhMbxjuZCFBre27CM0HU5udCUlTH4HHaCy7ZA34BDv46neZA19FgjHnzG3mshDQZD'
+url = url + '&access_token=EAACEdEose0cBAJNgYgwuLcoBIl7fLRudvyZAo3WHkZAjju1r4xovhUOfdcAmBTTwN8vcU5pqehCoM8pf44XhoZBszEMj6jEaU2uBd4f9rYVcS4VMfhRZA1WDZBbmXSldBtgidUGREzYMO7KcvewaxYKPWOSNPJspdCwJzftYPzCZA2KbsFnZBOlyWvbke6oZAsAZD'
 let alldata = [];
 
 
@@ -77,6 +77,7 @@ async function go2(url) {
             obj.parentGroupName = v.parentGroupName;
             obj.owner = v.owner;
             obj.title = v.title;
+            obj.description = v.description;
 
 
 

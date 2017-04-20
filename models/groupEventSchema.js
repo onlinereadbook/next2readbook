@@ -6,7 +6,8 @@ var groupEventSchema = new Schema({
     parentGroupId: String,
     parentGroupName: String,
     owner: String,
-    title: String
+    title: String,
+    description: String
 
 });
 

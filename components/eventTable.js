@@ -10,19 +10,25 @@ import Button from 'react-md/lib/Buttons';
 import moment from 'moment';
 import SelectField from 'react-md/lib/SelectFields';
 import Router from 'next/router';
-import lessonData from '../data/lessonData.json';
-
+//import lessonData from '../data/lessonData.json';
+import TablePagination from 'react-md/lib/DataTables/TablePagination'
+import evndata from '../evndata'
+import 'isomorphic-fetch'
 //console.log(stateItems);
 export default class EventTable extends React.Component {
     constructor(props) {
         super(props);
         let stateItems = JSON.parse(props.listgroup);
         stateItems = [''].concat(stateItems);
-
+        console.log(this.props.eventdata);
         this.state = {
-            stateLessonData: lessonData,
+            LessonData: this.props.eventdata,
             kind: props.kind,
-            stateItems: stateItems
+            stateItems: stateItems,
+            totalrows: (this.props.totalrows * 1),
+            start: this.props.start,
+            rowsPerPage: 10
+
         }
         //console.log('----');
         console.log(this.state.stateItems);
@@ -33,42 +39,43 @@ export default class EventTable extends React.Component {
         //console.log(typeof (this.state.kind));
         if (typeof (this.state.kind) != "undefined") {
             //  console.log('test');
-            this.state.stateLessonData = lessonData.filter(function (v, i) {
+            this.state.LessonData = lessonData.filter(function (v, i) {
                 return v.parentGroupId == initkind
             })
         }
     }
-    _handleChange = (kinddata, index, event) => {
-        // console.log(value);
-        // console.log(this.state.stateLessonData);
-        let temp = [];
-        if (kinddata != "") {
-            const href = `/events?kind=${kinddata}`
-            Router.push(href)
-            this.setState({
-                stateLessonData: lessonData.filter(function (v, i) {
-                    // console.log(v.parentGroupId + "-");
-                    //console.log(v.parentGroupId == value);
-                    return v.parentGroupId == kinddata
-                })
-            });
-        } else {
-            this.setState({
-                stateLessonData: lessonData
-            });
-        }
-        // this.state.stateLessonData =temp;
+    _handleChange = async (kinddata, index, event) => {
+
+        console.log(this.kinddata);
+
+        //this.setState({ LessonData: json, rowsPerPage: rowsPerPage, start: start, rowsPerPage: rowsPerPage });
 
     }
+    _handlePagination = async (start, rowsPerPage) => {
+        //this.setState({ inspections: this.props.foodInspections.inspections.slice(start, start + rowsPerPage) });
+        //const { url } = this.props
+        //console.log(evndata.url);
+        console.log(rowsPerPage);
+        const res = await fetch(`${evndata.url}/eventdata/${start}/${rowsPerPage}`);
+        const json = await res.json();
+        const href = `${evndata.url}/events?start=${start}&rowsPerPage=${rowsPerPage}`;
+        // console.log('json');
+        // console.log(json);
+        Router.push(href)
+        //this.props.eventData = json;
+        this.setState({ LessonData: json, rowsPerPage: rowsPerPage, start: start, rowsPerPage: rowsPerPage });
+
+    }
+
     render() {
-        const rows = this.state.stateLessonData.map((_, i) => {
+        const rows = this.state.LessonData.map((_, i) => {
             let urldata = `https://www.facebook.com/groups/${_.parentGroupId}`;
 
             if (_.parentGroupName == undefined) {
                 return
             }
             return (
-                <TableRow key={i} >
+                <TableRow key={i} baseId="pagination">
                     <TableColumn >    {moment(_.startTime).format("YYYY-MM-DD HH:mm")}       </TableColumn>
                     <TableColumn >
                         <Button raised label={_.parentGroupName} href={urldata} />
@@ -103,7 +110,10 @@ export default class EventTable extends React.Component {
                     <TableBody>
                         {rows}
                     </TableBody>
+                    <TablePagination onPagination={this._handlePagination} rows={this.state.totalrows} page={1} />
+
                 </DataTable>
+
             </div>
         );
     }

@@ -1,6 +1,12 @@
 注意雷擊
 1. import 的元件 一定要大寫 
 2. 前後端要撈元件要用custom server 
+新解法可以使用 
+        server.get('*', (req, res) => {
+            //req.req.data=''; //<-- url  這邊會對應到 getInitialProps
+            return handle(req, res)
+        })
+
 3. pm2 語法要使用 pm2 start npm --name "next" -- start
 4. vscode debug 還在研究中
 5. getInitialProps 在子元件中是沒辦法work的一定要寫在container
