@@ -5,14 +5,16 @@ var request = require('request');
 var fs = require('fs');
 var admin = require("firebase-admin");
 var serviceAccount = require("../serviceAccountKey.json");
- 
+
 var mongoose = require('bluebird').promisifyAll(require('mongoose'));
-mongoose.connect('mongodb://localhost/readbook');
+//mongoose.connect('mongodb://localhost/readbook');
+mongoose.connect("mongodb://readbookdb:pDsRGbIh53n0pUZ3gepWOYnoMnAE5GTkVKvtBkUhpAFeZoL0xxxzWJmBOsgawsooXzhUKtH0P2bsaKKqPRHn4g==@readbookdb.documents.azure.com:10250/readbook?ssl=true");
+
 mongoose.Promise = require('bluebird');
-var groupSchema=require('../models/groupSchema');
+var groupSchema = require('../models/groupSchema');
 var groupＭodel = mongoose.model('groupSchema', groupSchema);
 
-groupＭodel.remove({},()=>{
+groupＭodel.remove({}, () => {
     console.log('remove finish');
 })
 
@@ -25,7 +27,7 @@ admin.initializeApp({
 
 let url = 'https://graph.facebook.com/v2.8/';
 url = url + 'me?fields=groups{id,email,name,owner,privacy,icon,cover,description}';
-url = url + '&access_token=EAACEdEose0cBAHETmYgnIO0ItAjKXjZBAR5JdnZCcl42LvZBPijW5vZBWpwEi3aOiXhHh70Aa2cgRz7CsVZA982apWED8sQoa5u1mPZBBDVX2ZBZAYZBcE0JvEjraJTxwiZAZCMW3jzZC89hW6tezwnzvZByVXTz9fqqWRjUYIVb49urB8N9QoKKw1LNibZBrfZCpDfe9EZD';
+url = url + '&access_token=EAACEdEose0cBALIrteEZAaA1qLwxokGk9ihP5fyF2IZCV5izgfvWTRLlQuwY6ZC4wli3vYYNDuEvNPu83rxZBlaZBKAWZCawXs253hL8vfdNZAJrRnX6pBQQDxNCpKwmEJAiZA2mxVvtKk1eUjWfnj4eZADcoEEL40EIP2YneOISAR8lkGIalKQr3lS69UgFdOhAZD';
 
 
 let alldata = [];

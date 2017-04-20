@@ -4,7 +4,8 @@ var request = require('request');
 // import Eventslist from '../src/data/models/Events';
 var fs = require('fs');
 var mongoose = require('bluebird').promisifyAll(require('mongoose'));
-mongoose.connect('mongodb://localhost/readbook');
+//mongoose.connect('mongodb://localhost/readbook');
+mongoose.connect("mongodb://readbookdb:pDsRGbIh53n0pUZ3gepWOYnoMnAE5GTkVKvtBkUhpAFeZoL0xxxzWJmBOsgawsooXzhUKtH0P2bsaKKqPRHn4g==@readbookdb.documents.azure.com:10250/readbook?ssl=true");
 mongoose.Promise = require('bluebird');
 var groupEventSchema = require('../models/groupEventSchema');
 var groupEventＭodel = mongoose.model('groupEventSchema', groupEventSchema);
@@ -15,7 +16,7 @@ groupEventＭodel.remove({}, () => {
 
 
 let url = 'https://graph.facebook.com/v2.8/me?fields=id,name,events.limit(100){id,start_time,description,owner,end_time,parent_group,name}'
-url = url + '&access_token=EAACEdEose0cBAJNgYgwuLcoBIl7fLRudvyZAo3WHkZAjju1r4xovhUOfdcAmBTTwN8vcU5pqehCoM8pf44XhoZBszEMj6jEaU2uBd4f9rYVcS4VMfhRZA1WDZBbmXSldBtgidUGREzYMO7KcvewaxYKPWOSNPJspdCwJzftYPzCZA2KbsFnZBOlyWvbke6oZAsAZD'
+url = url + '&access_token=EAACEdEose0cBALIrteEZAaA1qLwxokGk9ihP5fyF2IZCV5izgfvWTRLlQuwY6ZC4wli3vYYNDuEvNPu83rxZBlaZBKAWZCawXs253hL8vfdNZAJrRnX6pBQQDxNCpKwmEJAiZA2mxVvtKk1eUjWfnj4eZADcoEEL40EIP2YneOISAR8lkGIalKQr3lS69UgFdOhAZD'
 let alldata = [];
 
 

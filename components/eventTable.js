@@ -46,7 +46,17 @@ export default class EventTable extends React.Component {
     }
     _handleChange = async (kinddata, index, event) => {
 
-        console.log(this.kinddata);
+        console.log(kinddata);
+        console.log('-----');
+        console.log(rowsPerPage);
+        const res = await fetch(`${evndata.url}/eventdata/${this.state.start}/${this.state.rowsPerPage}/kinddata`);
+        const json = await res.json();
+        const href = `${evndata.url}/events?start=${start}&rowsPerPage=${rowsPerPage}&kinddata=${kinddata}`;
+        // console.log('json');
+        // console.log(json);
+        Router.push(href)
+        //this.props.eventData = json;
+        this.setState({ LessonData: json, kinddata: kinddata });
 
         //this.setState({ LessonData: json, rowsPerPage: rowsPerPage, start: start, rowsPerPage: rowsPerPage });
 
@@ -75,7 +85,7 @@ export default class EventTable extends React.Component {
                 return
             }
             return (
-                <TableRow key={i} baseId="pagination">
+                <TableRow key={i} >
                     <TableColumn >    {moment(_.startTime).format("YYYY-MM-DD HH:mm")}       </TableColumn>
                     <TableColumn >
                         <Button raised label={_.parentGroupName} href={urldata} />
@@ -99,7 +109,7 @@ export default class EventTable extends React.Component {
                     itemValue="id"
                 />
 
-                <DataTable plain >
+                <DataTable plain baseId="pagination">
                     <TableHeader>
                         <TableRow autoAdjust={true} >
                             <TableColumn>時間</TableColumn>

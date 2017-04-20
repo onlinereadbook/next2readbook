@@ -17,6 +17,7 @@
     "url": "https://github.com/onlinereadbook/next2readbook/issues"
   },
   "dependencies": {
+    "assert": "^1.4.1",
     "bluebird": "^3.5.0",
     "components": "^0.1.0",
     "dgram": "^1.0.1",
@@ -32,6 +33,7 @@
     "koa-router": "^7.1.1",
     "lorem-ipsum": "^1.0.3",
     "moment": "^2.18.1",
+    "mongodb": "^2.2.26",
     "mongoose": "^4.9.4",
     "mz": "^2.6.0",
     "net": "^1.0.2",

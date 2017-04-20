@@ -16,7 +16,10 @@
 var mongoose = require('bluebird').promisifyAll(require('mongoose'));
 
 const options = { promiseLibrary: require('bluebird') };
-mongoose.connect('mongodb://localhost/readbook', options);
+//mongoose.connect('mongodb://localhost/readbook', options);
+mongoose.connect("mongodb://readbookdb:pDsRGbIh53n0pUZ3gepWOYnoMnAE5GTkVKvtBkUhpAFeZoL0xxxzWJmBOsgawsooXzhUKtH0P2bsaKKqPRHn4g==@readbookdb.documents.azure.com:10250/readbook?ssl=true");
+
+
 
 mongoose.Promise = require('bluebird');
 var youtubeSchema = require('../models/youtubeSchema');
