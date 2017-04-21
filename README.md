@@ -16,6 +16,7 @@
 
 react-md datatable 
 
+7. 部署到遠端 已經不能用 NODE_ENV=production （至少azure不吃)
 
 
 allen 大
