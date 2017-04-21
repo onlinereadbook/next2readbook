@@ -55,6 +55,6 @@
     "firebase": "^3.7.5"
   },
   "engines": {
-    "node": "7.8"
+    "node": "^7.8"
   }
 }
