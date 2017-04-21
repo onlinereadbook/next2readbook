@@ -25,9 +25,6 @@
     "firebase-token-generator": "^2.0.0",
     "fs": "0.0.1-security",
     "isomorphic-fetch": "^2.2.1",
-    "koa": "^2.2.0",
-    "koa-json": "^2.0.2",
-    "koa-router": "^7.1.1",
     "moment": "^2.18.1",
     "mongodb": "^2.2.26",
     "mongoose": "^4.9.4",
@@ -42,11 +39,10 @@
     "request-promise": "^4.2.0",
     "sequelize": "^3.30.4",
     "sort-by": "^1.2.0"
-
   },
   "homepage": "https://github.com/onlinereadbook/next2readbook#readme",
   "devDependencies": {
-    "firebase": "^3.7.5"
+
   },
   "engines": {
     "node": "^7.7.4"

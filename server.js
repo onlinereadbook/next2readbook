@@ -43,12 +43,15 @@ app.prepare()
             res.end(JSON.stringify(groupEventtotal));
 
         })
-        server.get('/eventdata/:start/:rowsPerPage', async (req, res) => {
+        server.get('/eventdata/:start/:rowsPerPage/:kinddata?', async (req, res) => {
             let start = (typeof (req.params.start) == "undefined") ? 0 : req.params.start * 1;
             let rowsPerPage = (typeof (req.params.rowsPerPage) == "undefined") ? 10 : req.params.rowsPerPage * 1;
+            console.log(req.params.kinddata);
+
             // console.log(rowsPerPage);
             const groupEventSchema = require('./models/groupEventSchema');
             const groupEventＭodel = mongoose.model('groupEventSchema', groupEventSchema);
+
             let data = await groupEventＭodel.find({}).limit(rowsPerPage).skip(start * 1).sort({ publishedAt: -1 });
             res.json(data);
 

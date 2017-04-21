@@ -5,7 +5,6 @@ import TableHeader from 'react-md/lib/DataTables/TableHeader';
 import TableBody from 'react-md/lib/DataTables/TableBody';
 import TableRow from 'react-md/lib/DataTables/TableRow';
 import TableColumn from 'react-md/lib/DataTables/TableColumn';
-import loremIpsum from 'lorem-ipsum';
 import Button from 'react-md/lib/Buttons';
 import moment from 'moment';
 import SelectField from 'react-md/lib/SelectFields';
@@ -48,10 +47,10 @@ export default class EventTable extends React.Component {
 
         console.log(kinddata);
         console.log('-----');
-        console.log(rowsPerPage);
-        const res = await fetch(`${evndata.url}/eventdata/${this.state.start}/${this.state.rowsPerPage}/kinddata`);
-        const json = await res.json();
-        const href = `${evndata.url}/events?start=${start}&rowsPerPage=${rowsPerPage}&kinddata=${kinddata}`;
+        console.log(this.state);
+        // const res = await fetch(`${evndata.url}/eventdata/${this.state.start}/${this.state.rowsPerPage}/${kinddata}`);
+        // const json = await res.json();
+        // const href = `${evndata.url}/events?start=${this.state.start}&rowsPerPage=${this.state.rowsPerPage}&kinddata=${kinddata}`;
         // console.log('json');
         // console.log(json);
         Router.push(href)
