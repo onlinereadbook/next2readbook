@@ -5,7 +5,6 @@ import TableHeader from 'react-md/lib/DataTables/TableHeader';
 import TableBody from 'react-md/lib/DataTables/TableBody';
 import TableRow from 'react-md/lib/DataTables/TableRow';
 import TableColumn from 'react-md/lib/DataTables/TableColumn';
-import loremIpsum from 'lorem-ipsum';
 import injectInk from 'react-md/lib/Inks';
 import Button from 'react-md/lib/Buttons';
 import moment from 'moment'

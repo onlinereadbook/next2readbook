@@ -1,13 +1,13 @@
 const express = require('express')
 const next = require('next')
-const admin = require("firebase-admin");
-const serviceAccount = require("./serviceAccountKey.json");
+// const admin = require("firebase-admin");
+// const serviceAccount = require("./serviceAccountKey.json");
 //console.log('serviceAccount');
 //console.log(typeof (serviceAccount));
-var bluebird = require('bluebird');
-var redis = require("redis");
-bluebird.promisifyAll(redis.RedisClient.prototype);
-bluebird.promisifyAll(redis.Multi.prototype);
+//var bluebird = require('bluebird');
+//var redis = require("redis");
+// bluebird.promisifyAll(redis.RedisClient.prototype);
+// bluebird.promisifyAll(redis.Multi.prototype);
 // const lessonData = require('./data/lessonData.json');
 const groupdata = require('./data/groupsimpleData.json');
 var mongoose = require('bluebird').promisifyAll(require('mongoose'));
