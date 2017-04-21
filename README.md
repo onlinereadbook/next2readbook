@@ -17,7 +17,7 @@
 react-md datatable 
 
 7. 部署到遠端 已經不能用 NODE_ENV=production （至少azure不吃)
-
+測試中
 
 allen 大
 @技安 把 package.json 的 dev 改成 "dev": "node --inspect-brk=5858 ./node_modules/.bin/next",
