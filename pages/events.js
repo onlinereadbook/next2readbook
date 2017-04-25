@@ -1,47 +1,66 @@
 import Layout from '../components/layout'
 import React, { PureComponent } from 'react';
-import EventTable from '../components/EventTable'
+import ReTable from '../components/ReTable'
 import 'isomorphic-fetch'
-import evndata from '../evndata'
+import evndata from '../evndata'  //環境變數
+import TableColumn from 'react-md/lib/DataTables/TableColumn';
+import TableRow from 'react-md/lib/DataTables/TableRow';
+import Button from 'react-md/lib/Buttons';
+import moment from 'moment';
+import limit from 'limit-string-length';
 
-export default class Events extends React.Component {
-    static async getInitialProps({ query: { start, rowsPerPage } }) {
-        const resgrouplist = await fetch('http://localhost:3000/grouplist');
-        const jsongrouplist = await resgrouplist.json();
-        //console.log(json);
-        let listgroup = [];
-        jsongrouplist.forEach(function (v, i) {
-            let temp = {}
-            temp.name = v.name;
-            temp.id = v.id;
-            listgroup.push(temp);
-        })
+export default class Events extends PureComponent {
+    static async getInitialProps() {
+        //如果要開放初始的網址可以LOAD資料這邊就要下Query
+        //不然這邊只要給初始值就可以了
 
-        const data = JSON.stringify(listgroup);
-        start = (start == "undefined") ? 0 : start;
-        rowsPerPage = (typeof (rowsPerPage) == "undefined" ? 10 : rowsPerPage)
-        const restotalrows = await fetch(`${evndata.url}/eventtotal`);
-        const totalrows = await restotalrows.json();
-        const res = await fetch(`${evndata.url}/eventdata/${start}/${rowsPerPage}`);
-        const json = await res.json();
-        // console.log('totalrows');
-        // console.log(totalrows);
+        const TableHeader = ["進入社群", "開始時間", "活動標題"];
+        const res = await fetch(`${evndata.url}/eventdata/0/10`);
+        const TableData = await res.json();
+        const res2 = await fetch(`${evndata.url}/eventtotal`);
+        const TableCount = await res2.json();
+        const DataEndPoint = "eventdata";
+        const WorkUrl = evndata.url;
+        //console.log(DataEndPoint);
 
-        return { 'listgroup': data, 'eventdata': json, 'start': start, 'totalrows': totalrows, 'rowsPerPage': rowsPerPage }
-        //return { 'listgroup': data, 'eventdata': eventdata }
+
+
+        // TableData = JSON.stringify(TableData);
+
+        return { TableHeader: TableHeader, TableData: TableData, TableCount: TableCount, WorkUrl: WorkUrl, DataEndPoint: DataEndPoint }
     }
 
+
     render() {
-        console.log(this.props.eventdata);
+
+        let changeFormat = (TableData) => {
+            return TableData.map((_, i) => {
+                //console.log(_);
+                let hrefdata = `https://www.facebook.com/groups/${_.parentGroupId}`;
+                let showmain = `${_.title} - ${_.description}`;
+                return (
+                    <TableRow key={i} >
+                        <TableColumn >    <Button raised href={hrefdata} label="進入社群" /> </TableColumn>
+                        <TableColumn >   {moment(_.startTime).format("YYYY-MM-DD HH:mm")}</TableColumn>
+                        <TableColumn  >  {limit(showmain, 60, '')}...             </TableColumn>
+                    </TableRow>
+                )
+            }
+            );
+
+        }
+
+        let calldata = async (start, rowsPerPage) => {
+
+            const res = await fetch(`${evndata.url}/eventdata/${start}/${rowsPerPage}`);
+            const TableData = await res.json();
+            const TableData2 = changeFormat(TableData);
+            return TableData2
+        }
+
         return (
-            <Layout title="精彩活動列表">
-                <EventTable kind={this.props.url.query.kind}
-                    listgroup={this.props.listgroup}
-                    eventdata={this.props.eventdata}
-                    start={this.props.start}
-                    totalrows={this.props.totalrows}
-                    rowsPerPage={this.props.rowsPerPage}
-                />
+            <Layout title="線上讀書會活動一覽表">
+                <ReTable {...this.props} changeFormat={changeFormat} calldata={calldata}></ReTable>
             </Layout>
         )
     }

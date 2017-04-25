@@ -11,13 +11,9 @@
 4. vscode debug 還在研究中
 5. getInitialProps 在子元件中是沒辦法work的一定要寫在container
 
-6. apollodata 是必要導入 因為 可以送出一個需求回傳 需要多個需要的資訊
-例如分頁 送出後希望可以回傳 10筆資料 與 總比數 如果開太多 restful就會很麻煩
-
-react-md datatable 
-
-7. 部署到遠端 已經不能用 NODE_ENV=production （至少azure不吃)
-測試中
+6. 重構Table要資料
+ 主要的清楚state需要的資料有total 然後就是會異動的資料會動到哪些state
+ 根據這些state 在去撈茲料
 
 allen 大
 @技安 把 package.json 的 dev 改成 "dev": "node --inspect-brk=5858 ./node_modules/.bin/next",

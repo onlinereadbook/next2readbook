@@ -9,7 +9,15 @@ import FontIcon from 'react-md/lib/FontIcons'
 import ListItem from 'react-md/lib/Lists/ListItem'
 import NavigationDrawer from 'react-md/lib/NavigationDrawers'
 import SelectField from 'react-md/lib/SelectFields'
+import Router from 'next/router'
 
+Router.onRouteChangeStart = (url) => {
+    console.log(`Loading: ${url}`)
+    //NProgress.start()
+    //this.setState({ isLoading: true });
+}
+Router.onRouteChangeComplete = () => { thisState.set({ isLoading: false }); }
+Router.onRouteChangeError = () => thisState.set({ isLoading: false });
 
 
 const avatarSrc = 'https://cloud.githubusercontent.com/assets/13041/19686250/971bf7f8-9ac0-11e6-975c-188defd82df1.png'
@@ -36,6 +44,15 @@ class NavigationLink extends React.Component {
     // required by React-MD/AccessibleFakeButton, but Stateless components
     // don't have one by design:
     // https://github.com/facebook/react/issues/4936
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            isLoading: false
+        }
+    }
+
+
     render() {
         const { href, as, children, ..._props } = this.props
         return (
@@ -125,13 +142,12 @@ export default ({ children, title = '線上讀書會官方網站' }) => {
 
                     />
 
-
                 ]}
                 contentClassName='md-grid'
                 drawerHeaderChildren={drawerHeaderChildren}
                 mobileDrawerType={NavigationDrawer.DrawerTypes.TEMPORARY_MINI}
                 tabletDrawerType={NavigationDrawer.DrawerTypes.PERSISTENT_MINI}
-                desktopDrawerType={NavigationDrawer.DrawerTypes.PERSISTENT_MINI}
+                desktopDrawerType={NavigationDrawer.DrawerTypes.FULL_HEIGHT}
                 toolbarTitle={title}
                 toolbarActions={closeButton}
             >

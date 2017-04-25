@@ -9,14 +9,12 @@ mongoose.connect("mongodb://readbookdb:pDsRGbIh53n0pUZ3gepWOYnoMnAE5GTkVKvtBkUhp
 mongoose.Promise = require('bluebird');
 var groupEventSchema = require('../models/groupEventSchema');
 var groupEventＭodel = mongoose.model('groupEventSchema', groupEventSchema);
-
 groupEventＭodel.remove({}, () => {
     console.log('remove finish');
 })
 
-
 let url = 'https://graph.facebook.com/v2.8/me?fields=id,name,events.limit(100){id,start_time,description,owner,end_time,parent_group,name}'
-url = url + '&access_token=EAACEdEose0cBALIrteEZAaA1qLwxokGk9ihP5fyF2IZCV5izgfvWTRLlQuwY6ZC4wli3vYYNDuEvNPu83rxZBlaZBKAWZCawXs253hL8vfdNZAJrRnX6pBQQDxNCpKwmEJAiZA2mxVvtKk1eUjWfnj4eZADcoEEL40EIP2YneOISAR8lkGIalKQr3lS69UgFdOhAZD'
+url = url + '&access_token=EAACEdEose0cBADvbt6hs1EJZCn3nDZB8JINoPNU474j9FWAHiGwlGiWmw4NVtJGXA074RkVZBSBd4joZCcfuKl4ozi7agN0ZCRGl6rW1ivf6Ewtn6lR8IN3fhHZA7KBsRb3h3IzG1UgrCKjbiQxrcRpZABjCRZBNnmypuZBTEwF1GGWsZAwyZB6U4frGkVBERE1AXkZD'
 let alldata = [];
 
 
@@ -73,18 +71,20 @@ async function go2(url) {
         // fs.writeFile("data/lessonData.json", JSON.stringify(alldata));
 
         alldata.forEach((v, i) => {
-            let obj = {};
-            obj.parentGroupId = v.parentGroupId;
-            obj.parentGroupName = v.parentGroupName;
-            obj.owner = v.owner;
-            obj.title = v.title;
-            obj.description = v.description;
+            if (typeof (v.parentGroupId) !== "undefined") {
+                let obj = {};
+                obj.parentGroupId = v.parentGroupId;
+                obj.parentGroupName = v.parentGroupName;
+                obj.owner = v.owner;
+                obj.title = v.title;
+                obj.description = v.description;
+                obj.startTime = v.startTime;
 
 
-
-            let data = new groupEventＭodel(obj);
-            console.log(data);
-            data.save()
+                let data = new groupEventＭodel(obj);
+                console.log(data);
+                data.save()
+            }
 
         })
         return

@@ -20,14 +20,15 @@ export default class EventTable extends React.Component {
         let stateItems = JSON.parse(props.listgroup);
         stateItems = [''].concat(stateItems);
         console.log(this.props.eventdata);
+
         this.state = {
             LessonData: this.props.eventdata,
             kind: props.kind,
             stateItems: stateItems,
             totalrows: (this.props.totalrows * 1),
-            start: this.props.start,
-            rowsPerPage: 10
-
+            start: (typeof (this.props.start) == "undefined") ? 0 : this.props.start,
+            rowsPerPage: 10,
+            GroupId: this.props.GroupId
         }
         //console.log('----');
         console.log(this.state.stateItems);
@@ -48,11 +49,11 @@ export default class EventTable extends React.Component {
         console.log(kinddata);
         console.log('-----');
         console.log(this.state);
-        // const res = await fetch(`${evndata.url}/eventdata/${this.state.start}/${this.state.rowsPerPage}/${kinddata}`);
-        // const json = await res.json();
-        // const href = `${evndata.url}/events?start=${this.state.start}&rowsPerPage=${this.state.rowsPerPage}&kinddata=${kinddata}`;
-        // console.log('json');
-        // console.log(json);
+        const res = await fetch(`${evndata.url}/eventdata/${this.state.start}/${this.state.rowsPerPage}/${kinddata}`);
+        const json = await res.json();
+        const href = `${evndata.url}/events?start=${this.state.start}&rowsPerPage=${this.state.rowsPerPage}&kinddata=${kinddata}`;
+        console.log('json');
+        console.log(json);
         Router.push(href)
         //this.props.eventData = json;
         this.setState({ LessonData: json, kinddata: kinddata });
@@ -64,7 +65,7 @@ export default class EventTable extends React.Component {
         //this.setState({ inspections: this.props.foodInspections.inspections.slice(start, start + rowsPerPage) });
         //const { url } = this.props
         //console.log(evndata.url);
-        console.log(rowsPerPage);
+        //console.log(rowsPerPage);
         const res = await fetch(`${evndata.url}/eventdata/${start}/${rowsPerPage}`);
         const json = await res.json();
         const href = `${evndata.url}/events?start=${start}&rowsPerPage=${rowsPerPage}`;

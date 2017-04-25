@@ -7,8 +7,8 @@ var groupEventSchema = new Schema({
     parentGroupName: String,
     owner: String,
     title: String,
-    description: String
-
+    description: String,
+    startTime: Date
 });
 
 module.exports = groupEventSchema;
