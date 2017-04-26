@@ -14,7 +14,7 @@ var mongoose = require('bluebird').promisifyAll(require('mongoose'));
 //mongoose.connect('mongodb://localhost/readbook');
 mongoose.connect("mongodb://readbookdb:pDsRGbIh53n0pUZ3gepWOYnoMnAE5GTkVKvtBkUhpAFeZoL0xxxzWJmBOsgawsooXzhUKtH0P2bsaKKqPRHn4g==@readbookdb.documents.azure.com:10250/readbook?ssl=true");
 
-mongoose.Promise = require('bluebird');
+//mongoose.Promise = require('bluebird');
 const dev = process.env.NODE_ENV !== 'production'
 const app = next({
     dev
