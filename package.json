@@ -26,7 +26,6 @@
     "fs": "0.0.1-security",
     "graphql": "^0.9.3",
     "isomorphic-fetch": "^2.2.1",
-    "limit-string-length": "0.0.9",
     "moment": "^2.18.1",
     "mongodb": "^2.2.26",
     "mongoose": "^4.9.4",
@@ -42,7 +41,8 @@
     "request": "^2.81.0",
     "request-promise": "^4.2.0",
     "sequelize": "^3.30.4",
-    "sort-by": "^1.2.0"
+    "sort-by": "^1.2.0",
+    "stringz": "^0.1.2"
   },
   "homepage": "https://github.com/onlinereadbook/next2readbook#readme",
   "devDependencies": {},

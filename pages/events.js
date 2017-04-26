@@ -7,7 +7,7 @@ import TableColumn from 'react-md/lib/DataTables/TableColumn';
 import TableRow from 'react-md/lib/DataTables/TableRow';
 import Button from 'react-md/lib/Buttons';
 import moment from 'moment';
-import limit from 'limit-string-length';
+import { limit, substring, length } from 'stringz';
 
 export default class Events extends PureComponent {
     static async getInitialProps() {

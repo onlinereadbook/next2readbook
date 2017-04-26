@@ -18,3 +18,5 @@
 allen 大
 @技安 把 package.json 的 dev 改成 "dev": "node --inspect-brk=5858 ./node_modules/.bin/next",
 可以把 node debug 模式開啟來，不過我還是無法停在我要的斷點, 你可以接著研究看看
+
+
