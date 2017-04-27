@@ -15,6 +15,13 @@
  主要的清楚state需要的資料有total 然後就是會異動的資料會動到哪些state
  根據這些state 在去撈茲料
 
+7. 部署雷  fs mz 跟檔案操作有關的會GG linux上
+
+8. 為了相依性安裝時
+npm install bluebird components express isomorphic-fetch moment mongoose next prop-types react react-addons-css-transition-group react-addons-transition-group react-dom react-md sort-by stringz
+
+直接下語法讓自己查找不要限定版本不然會ＧＧ
+
 allen 大
 @技安 把 package.json 的 dev 改成 "dev": "node --inspect-brk=5858 ./node_modules/.bin/next",
 可以把 node debug 模式開啟來，不過我還是無法停在我要的斷點, 你可以接著研究看看
