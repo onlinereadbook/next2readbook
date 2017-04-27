@@ -15,10 +15,21 @@
  主要的清楚state需要的資料有total 然後就是會異動的資料會動到哪些state
  根據這些state 在去撈茲料
 
-7. 部署雷  fs mz 跟檔案操作有關的會GG linux上
+7. 部署雷  fs mz 跟檔案操作有關的會GG linux上 ,要記得使用 NODE_ENV=production node ./server.js  模式 不然會一直hmr
 
 8. 為了相依性安裝時
 npm install bluebird components express isomorphic-fetch moment mongoose next prop-types react react-addons-css-transition-group react-addons-transition-group react-dom react-md sort-by stringz
+
+9. 用docker萬歲 
+
+FROM node:7.8.0
+COPY / /usr/src/app
+WORKDIR /usr/src/app
+EXPOSE 3000
+CMD npm start
+
+
+
 
 直接下語法讓自己查找不要限定版本不然會ＧＧ
 

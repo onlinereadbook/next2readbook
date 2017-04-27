@@ -78,7 +78,10 @@ app.prepare()
         })
 
         server.get('*', (req, res) => {
-            //req.req.data=''; //<-- url
+            console.log('test123');
+            console.log(req.url);
+            //console.log(youtubetotal);
+            req.data = '123'; //<-- url
             return handle(req, res)
         })
 
