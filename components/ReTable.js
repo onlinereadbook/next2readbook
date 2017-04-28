@@ -17,16 +17,28 @@ class ReTable extends React.Component {
 
         this.state = {
             TableHeader: (typeof (this.props.TableHeader) == "undefined") ? ["尚未載入資料"] : this.props.TableHeader,
-            TableData: (typeof (this.props.TableData) == "undefined") ? ["尚未載入資料"] : this.props.TableData,
-            TableCount: (typeof (this.props.TableCount) == "undefined") ? ["尚未載入資料"] : this.props.TableCount,
-            Rows: this.props.changeFormat(this.props.TableData)
+            // TableData: (typeof (this.props.TableData) == "undefined") ? ["尚未載入資料"] : this.props.TableData,
+            // TableCount: (typeof (this.props.TableCount) == "undefined") ? ["尚未載入資料"] : this.props.TableCount,
+            TableData: ["尚未載入資料"],
+            TableCount: 0,
+            Rows: []
 
         }
-        console.log('Rows')
-
+        console.log('constructor')
         //console.log(this.state.Rows)
 
     }
+    async componentDidMount() {
+        console.log('componentDidMount');
+        const res1 = await fetch(this.props.TableData);
+        const TableData = await res1.json();
+        const res2 = await fetch(this.props.TableCount);
+        const TableCount = await res2.json();
+        const Rows = await this.props.changeFormat(TableData)
+        this.setState({ TableData: TableData, TableCount: TableCount, Rows: Rows });
+
+    }
+
 
     _handlePagination = async (start, rowsPerPage) => {
         //console.log('_handlePagination');
@@ -56,7 +68,8 @@ class ReTable extends React.Component {
 
 
         return (
-            <div><DataTable baseId="ReTable" plain>
+            <DataTable plain baseId="pagination">
+
                 <TableHeader>
                     <TableRow autoAdjust={true} >
                         {TableRowColumn}
@@ -65,14 +78,11 @@ class ReTable extends React.Component {
                 <TableBody>
                     {this.state.Rows}
                 </TableBody>
-
-                <TablePagination onPagination={this._handlePagination}
-                    rows={this.state.TableCount} page={1}
-                />
+                <TablePagination onPagination={this._handlePagination} rows={this.state.TableCount} page={1} />
 
             </DataTable>
 
-            </div>)
+        )
     }
 }
 export default ReTable;

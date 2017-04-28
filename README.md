@@ -28,6 +28,9 @@ WORKDIR /usr/src/app
 EXPOSE 3000
 CMD npm start
 
+10.  server.get('*', (req, res) => { }
+這邊使用初始值 使用req.data='xxx'另外在 getInitialProps 這邊用 res.data就可以吃到了
+
 
 
 

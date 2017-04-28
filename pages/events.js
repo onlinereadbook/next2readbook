@@ -10,16 +10,22 @@ import moment from 'moment';
 import { limit, substring, length } from 'stringz';
 
 export default class Events extends PureComponent {
-    static async getInitialProps(res) {
+    static async getInitialProps({ query: { start, rowsPerPage } }) {
         //如果要開放初始的網址可以LOAD資料這邊就要下Query
         //不然這邊只要給初始值就可以了
         console.log('res.data');
-        console.log(res.req.data);
+        start = (typeof (start) == "undefined") ? 0 : start;
+        rowsPerPage = (typeof (rowsPerPage) == "undefined" ? 10 : rowsPerPage)
+        // console.log(res.req.data);
         const TableHeader = ["進入社群", "開始時間", "活動標題"];
-        const res1 = await fetch(`${evndata.url}/eventdata/0/10`);
-        const TableData = await res1.json();
-        const res2 = await fetch(`${evndata.url}/eventtotal`);
-        const TableCount = await res2.json();
+        // const res1 = await fetch(`${evndata.url}/eventdata/0/10`);
+        // const TableData = await res1.json();
+        // const res2 = await fetch(`${evndata.url}/eventtotal`);
+        // const TableCount = await res2.json();
+        //這邊修改成到constructor去fetch才不會每次都做兩次
+
+        const TableData = `${evndata.url}/eventdata/${start}/${rowsPerPage}`;
+        const TableCount = `${evndata.url}/eventtotal`;
         const DataEndPoint = "eventdata";
         const WorkUrl = evndata.url;
         //console.log(DataEndPoint);

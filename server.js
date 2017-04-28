@@ -78,10 +78,12 @@ app.prepare()
         })
 
         server.get('*', (req, res) => {
-            console.log('test123');
-            console.log(req.url);
-            //console.log(youtubetotal);
-            req.data = '123'; //<-- url
+//這邊可以給初始值使用            
+            //req.req.data=''; //<-- url
+            // console.log(req.url);
+            // if (req.url === '/youtube') {
+            //     console.log('youtubedata');
+            // }
             return handle(req, res)
         })
 

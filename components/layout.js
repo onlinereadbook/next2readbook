@@ -9,15 +9,6 @@ import FontIcon from 'react-md/lib/FontIcons'
 import ListItem from 'react-md/lib/Lists/ListItem'
 import NavigationDrawer from 'react-md/lib/NavigationDrawers'
 import SelectField from 'react-md/lib/SelectFields'
-import Router from 'next/router'
-
-Router.onRouteChangeStart = (url) => {
-    console.log(`Loading: ${url}`)
-    //NProgress.start()
-    //this.setState({ isLoading: true });
-}
-Router.onRouteChangeComplete = () => { thisState.set({ isLoading: false }); }
-Router.onRouteChangeError = () => thisState.set({ isLoading: false });
 
 
 const avatarSrc = 'https://cloud.githubusercontent.com/assets/13041/19686250/971bf7f8-9ac0-11e6-975c-188defd82df1.png'
