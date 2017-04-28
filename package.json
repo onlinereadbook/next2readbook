@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "node server.js",
     "build": "next build",
-    "start": "NODE_ENV=production node ./server.js "
+    "start": "NODE_ENV=production node ./server.js ",
+    "build-css": "node-sass sass/ -o static/"
   },
   "repository": {
     "type": "git",
@@ -24,6 +25,7 @@
     "moment": "^2.18.1",
     "mongoose": "^4.9.6",
     "next": "^2.2.0",
+    "node-sass": "^4.5.2",
     "prop-types": "^15.5.8",
     "react": "^15.5.4",
     "react-addons-css-transition-group": "^15.5.2",

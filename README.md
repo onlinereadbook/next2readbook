@@ -31,6 +31,11 @@ CMD npm start
 10.  server.get('*', (req, res) => { }
 這邊使用初始值 使用req.data='xxx'另外在 getInitialProps 這邊用 res.data就可以吃到了
 
+11. 避免反覆要資料請在
+
+12. 更細相的 react-md sass 自己設定 可以參考這邊的用法 先build在使用import css 在用classname吃
+https://github.com/mlaursen/react-md/tree/master/examples/with-react-router-v4
+
 
 
 
@@ -40,4 +45,4 @@ allen 大
 @技安 把 package.json 的 dev 改成 "dev": "node --inspect-brk=5858 ./node_modules/.bin/next",
 可以把 node debug 模式開啟來，不過我還是無法停在我要的斷點, 你可以接著研究看看
 
-
+react-md 筆記 

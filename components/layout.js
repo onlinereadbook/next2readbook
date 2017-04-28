@@ -9,9 +9,9 @@ import FontIcon from 'react-md/lib/FontIcons'
 import ListItem from 'react-md/lib/Lists/ListItem'
 import NavigationDrawer from 'react-md/lib/NavigationDrawers'
 import SelectField from 'react-md/lib/SelectFields'
+import IconSeparator from 'react-md/lib/Helpers/IconSeparator';
 
-
-const avatarSrc = 'https://cloud.githubusercontent.com/assets/13041/19686250/971bf7f8-9ac0-11e6-975c-188defd82df1.png'
+const avatarSrc = '/static/logo.png'
 
 const drawerHeaderChildren = [
     <Avatar
@@ -20,15 +20,10 @@ const drawerHeaderChildren = [
         role='presentation'
         iconSized
         style={{ alignSelf: 'center', marginLeft: 16, marginRight: 16, flexShrink: 0 }}
+        suffix='w'
     />,
-    <SelectField
-        id='account-switcher'
-        defaultValue='Jonathan'
-        menuItems={['Jonathan', 'Fred']}
-        key='account-switcher'
-        position={SelectField.Positions.BELOW}
-        className='md-select-field--toolbar'
-    />
+    <h3 style={{ marginTop: 18 }}>線上讀書會官網</h3>
+
 ]
 class NavigationLink extends React.Component {
     // NOTE: Don't try using Stateless (function) component here. `ref` is
@@ -58,16 +53,17 @@ class NavigationLink extends React.Component {
         )
     }
 }
-export default ({ children, title = '線上讀書會官方網站' }) => {
+export default ({ children, title = '歡迎來一起找夥伴線上來學習吧' }) => {
 
-    const closeButton = (
+    const searchButton = (
+
         <Button
             icon
-            tooltipLabel='Close the interactive demo'
+            tooltipLabel='搜尋功能尚未開放'
             tooltipDelay={150}
             tooltipPosition='left'
         >
-            close
+            search
     </Button>
     )
 
@@ -77,12 +73,10 @@ export default ({ children, title = '線上讀書會官方網站' }) => {
             <meta charSet='utf-8' />
             <meta name='viewport' content='initial-scale=1.0, width=device-width' />
 
-            <link rel="stylesheet" href="//unpkg.com/react-md/dist/react-md.teal-yellow.min.css" />
+            <link rel="stylesheet" href="/static/my.css" />
             <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto:300,400,500' />
             <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Material+Icons' />
         </Head>
-
-
         <header>
             <NavigationDrawer
                 navItems={[
@@ -92,7 +86,7 @@ export default ({ children, title = '線上讀書會官方網站' }) => {
                         href='/'
                         leftIcon={<FontIcon>inbox</FontIcon>}
                         tileClassName='md-list-tile--mini'
-                        primaryText={'精彩課程表'}
+                        primaryText={'精彩的讀書會'}
                     />,
                     <ListItem
                         key='1'
@@ -140,7 +134,7 @@ export default ({ children, title = '線上讀書會官方網站' }) => {
                 tabletDrawerType={NavigationDrawer.DrawerTypes.PERSISTENT_MINI}
                 desktopDrawerType={NavigationDrawer.DrawerTypes.FULL_HEIGHT}
                 toolbarTitle={title}
-                toolbarActions={closeButton}
+                toolbarActions={searchButton}
             >
 
                 {children}

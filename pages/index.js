@@ -1,15 +1,11 @@
 import Layout from '../components/layout';
 import React, { PureComponent } from 'react';
-
-const cn = 'md-table-column--adjusted';
-
+import AboutMe from '../components/Cards/AboutMe'
 export default (props) => {
     return (
         <Layout>
-
-            <div >LOGO
-                </div>
-
-        </Layout>
+            <AboutMe />
+            <AboutMe /><AboutMe />
+        </Layout >
     )
 }
