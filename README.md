@@ -3,7 +3,8 @@
 2. 前後端要撈元件要用custom server 
 新解法可以使用 
         server.get('*', (req, res) => {
-            //req.req.data=''; //<-- url  這邊會對應到 getInitialProps
+            //req.data=''; //<-- url  這邊會對應到 getInitialProps
+            req.res.data
             return handle(req, res)
         })
 
@@ -17,7 +18,7 @@
 
 7. 部署雷  fs mz 跟檔案操作有關的會GG linux上 ,要記得使用 NODE_ENV=production node ./server.js  模式 不然會一直hmr
 
-8. 為了相依性安裝時
+8. 為了相依性安裝時 直接下語法讓自己查找不要限定版本不然會ＧＧ
 npm install bluebird components express isomorphic-fetch moment mongoose next prop-types react react-addons-css-transition-group react-addons-transition-group react-dom react-md sort-by stringz
 
 9. 用docker萬歲 
@@ -31,15 +32,12 @@ CMD npm start
 10.  server.get('*', (req, res) => { }
 這邊使用初始值 使用req.data='xxx'另外在 getInitialProps 這邊用 res.data就可以吃到了
 
-11. 避免反覆要資料請在
-
-12. 更細相的 react-md sass 自己設定 可以參考這邊的用法 先build在使用import css 在用classname吃
+11. 更細相的 react-md sass 自己設定 可以參考這邊的用法 先build在使用import css 在用classname吃
 https://github.com/mlaursen/react-md/tree/master/examples/with-react-router-v4
 
 
 
 
-直接下語法讓自己查找不要限定版本不然會ＧＧ
 
 allen 大
 @技安 把 package.json 的 dev 改成 "dev": "node --inspect-brk=5858 ./node_modules/.bin/next",

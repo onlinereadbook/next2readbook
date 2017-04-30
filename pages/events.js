@@ -11,7 +11,6 @@ import { limit, substring, length } from 'stringz';
 
 export default class Events extends PureComponent {
     static async getInitialProps({ query: { start, rowsPerPage } }) {
-
         start = (typeof (start) == "undefined") ? 0 : start;
         rowsPerPage = (typeof (rowsPerPage) == "undefined" ? 10 : rowsPerPage)
         const TableHeader = ["進入社群", "開始時間", "活動標題"];

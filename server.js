@@ -12,7 +12,10 @@ const next = require('next')
 const groupdata = require('./data/groupsimpleData.json');
 var mongoose = require('bluebird').promisifyAll(require('mongoose'));
 //mongoose.connect('mongodb://localhost/readbook');
-mongoose.connect("mongodb://readbookdb:pDsRGbIh53n0pUZ3gepWOYnoMnAE5GTkVKvtBkUhpAFeZoL0xxxzWJmBOsgawsooXzhUKtH0P2bsaKKqPRHn4g==@readbookdb.documents.azure.com:10250/readbook?ssl=true");
+var mongodbKey = require("./mongodbKey.json");
+const key = mongodbKey.key.toString();
+//console.log(key);
+mongoose.connect(`mongodb://readbookdb:${key}@readbookdb.documents.azure.com:10250/readbook?ssl=true`);
 
 //mongoose.Promise = require('bluebird');
 const dev = process.env.NODE_ENV !== 'production'
@@ -78,8 +81,9 @@ app.prepare()
         })
 
         server.get('*', (req, res) => {
-//這邊可以給初始值使用            
+            //這邊可以給初始值使用            
             //req.req.data=''; //<-- url
+            req.data = "123";
             // console.log(req.url);
             // if (req.url === '/youtube') {
             //     console.log('youtubedata');

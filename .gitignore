@@ -2,6 +2,7 @@ node_modules
 .next
 youtubekey.js
 serviceAccountKey.json
+mongodbKey.json
 .cronjob
 # Logs
 logs

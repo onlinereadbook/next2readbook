@@ -1020,18 +1020,18 @@ html {
   .md-btn--text {
     font-size: 14px;
     height: 36px;
-    margin-bottom: 6px;
-    margin-top: 6px; }
+    margin-bottom: -3px;
+    margin-top: -3px; }
     .md-btn--text::before, .md-btn--text::after {
       content: '';
-      height: 6px;
+      height: -3px;
       left: 0;
       position: absolute;
       right: 0; }
     .md-btn--text::before {
-      top: -6px; }
+      top: 3px; }
     .md-btn--text::after {
-      bottom: -6px; }
+      bottom: 3px; }
   .md-btn--fixed-tr {
     right: 16px;
     top: 16px; }
