@@ -31,8 +31,7 @@
     "react-addons-css-transition-group": "^15.5.2",
     "react-addons-transition-group": "^15.5.2",
     "react-dom": "^15.5.4",
-    "react-md": "^1.0.12",
-    "sort-by": "^1.2.0"
+    "react-md": "^1.0.12"
   },
   "homepage": "https://github.com/onlinereadbook/next2readbook#readme",
   "devDependencies": {}

@@ -8,7 +8,6 @@ import TableColumn from 'react-md/lib/DataTables/TableColumn';
 import injectInk from 'react-md/lib/Inks';
 import Button from 'react-md/lib/Buttons';
 import moment from 'moment'
-import sortBy from 'sort-by'
 import TablePagination from 'react-md/lib/DataTables/TablePagination'
 import Router from 'next/router'
 import evndata from '../evndata'
