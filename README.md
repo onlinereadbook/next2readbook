@@ -36,6 +36,7 @@ CMD npm start
 https://github.com/mlaursen/react-md/tree/master/examples/with-react-router-v4
 
 
+12. 把 mongo的sercet抽出來
 
 
 

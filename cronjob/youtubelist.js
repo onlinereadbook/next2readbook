@@ -3,14 +3,14 @@
 // import Youtubelist from '../src/data/models/YoutubeData';
 //console.log(databaseUrl);
 
-var admin = require("firebase-admin");
-var serviceAccount = require("../serviceAccountKey.json");
+//var admin = require("firebase-admin");
+//var serviceAccount = require("../serviceAccountKey.json");
 
-var refreshToken;
-admin.initializeApp({
-    credential: admin.credential.cert(serviceAccount),
-    databaseURL: "https://macro-duality-160006.firebaseio.com"
-});
+// var refreshToken;
+// admin.initializeApp({
+//     credential: admin.credential.cert(serviceAccount),
+//     databaseURL: "https://macro-duality-160006.firebaseio.com"
+// });
 
 var mongoose = require('bluebird').promisifyAll(require('mongoose'));
 //mongoose.connect('mongodb://localhost/readbook');
@@ -20,7 +20,7 @@ mongoose.connect("mongodb://readbookdb:pDsRGbIh53n0pUZ3gepWOYnoMnAE5GTkVKvtBkUhp
 
 
 mongoose.Promise = require('bluebird');
-var youtubeSchema = require('../models/youtubeSchema');
+var youtubeSchema = require('../data/models/youtubeSchema');
 var youtubeＭodel = mongoose.model('youtubeSchema', youtubeSchema);
 console.log(mongoose);
 youtubeＭodel.remove({}, () => {
@@ -77,7 +77,7 @@ function first(url) {
         let pageToken = data.nextPageToken;
 
         //console.log(data.items);
-        //var arr = JSON.stringify(data.items);
+        //var arr = JSON.strigify(data.items);
         console.log('下一頁的pageToken:' + pageToken);
         // if (data.items == "object") {
 

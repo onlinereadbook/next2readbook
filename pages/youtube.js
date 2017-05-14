@@ -7,7 +7,7 @@ import TableColumn from 'react-md/lib/DataTables/TableColumn';
 import TableRow from 'react-md/lib/DataTables/TableRow';
 import Button from 'react-md/lib/Buttons';
 import moment from 'moment';
-import { limit, substring, length } from 'stringz';
+//import { limit, substring, length } from 'stringz';
 
 export default class Events extends PureComponent {
     static async getInitialProps({ query: { start, rowsPerPage } }) {
@@ -33,7 +33,7 @@ export default class Events extends PureComponent {
                     <TableRow key={i} >
                         <TableColumn >    <Button raised href={hrefdata} label="進入社群" /> </TableColumn>
                         <TableColumn >   {moment(_.startTime).format("YYYY-MM-DD HH:mm")}</TableColumn>
-                        <TableColumn  >  {limit(showmain, 60, '')}...             </TableColumn>
+                        <TableColumn  >  {showmain}             </TableColumn>
                     </TableRow>
                 )
             }
