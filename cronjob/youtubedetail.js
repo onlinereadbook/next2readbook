@@ -17,12 +17,10 @@ var mongoose = require('bluebird').promisifyAll(require('mongoose'));
 
 const options = { promiseLibrary: require('bluebird') };
 //mongoose.connect('mongodb://localhost/readbook', options);
-mongoose.connect("mongodb://readbookdb:pDsRGbIh53n0pUZ3gepWOYnoMnAE5GTkVKvtBkUhpAFeZoL0xxxzWJmBOsgawsooXzhUKtH0P2bsaKKqPRHn4g==@readbookdb.documents.azure.com:10250/readbook?ssl=true");
-
-
-
-mongoose.Promise = require('bluebird');
-var youtubeSchema = require('../models/youtubeSchema');
+//mongoose.connect("mongodb://readbookdb:pDsRGbIh53n0pUZ3gepWOYnoMnAE5GTkVKvtBkUhpAFeZoL0xxxzWJmBOsgawsooXzhUKtH0P2bsaKKqPRHn4g==@readbookdb.documents.azure.com:10250/readbook?ssl=true");
+mongoose.connect('mongodb://polo:5201314@128.199.196.98:27020/readbook');
+//mongoose.Promise = require('bluebird');
+var youtubeSchema = require('../data/models/youtubeSchema');
 var youtubeＭodel = mongoose.model('youtubeSchema', youtubeSchema);
 
 

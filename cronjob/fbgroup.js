@@ -3,15 +3,16 @@ var request = require('request');
 // import { databaseUrl } from '../src/config';
 // import GroupList from '../src/data/models/Group';
 var fs = require('fs');
-var admin = require("firebase-admin");
+//var admin = require("firebase-admin");
 var serviceAccount = require("../serviceAccountKey.json");
 
 var mongoose = require('bluebird').promisifyAll(require('mongoose'));
 //mongoose.connect('mongodb://localhost/readbook');
-mongoose.connect("mongodb://readbookdb:pDsRGbIh53n0pUZ3gepWOYnoMnAE5GTkVKvtBkUhpAFeZoL0xxxzWJmBOsgawsooXzhUKtH0P2bsaKKqPRHn4g==@readbookdb.documents.azure.com:10250/readbook?ssl=true");
+//mongoose.connect("mongodb://readbookdb:pDsRGbIh53n0pUZ3gepWOYnoMnAE5GTkVKvtBkUhpAFeZoL0xxxzWJmBOsgawsooXzhUKtH0P2bsaKKqPRHn4g==@readbookdb.documents.azure.com:10250/readbook?ssl=true");
+mongoose.connect('mongodb://polo:5201314@128.199.196.98:27020/readbook');
 
 mongoose.Promise = require('bluebird');
-var groupSchema = require('../models/groupSchema');
+var groupSchema = require('../data/models/groupSchema');
 var groupＭodel = mongoose.model('groupSchema', groupSchema);
 
 groupＭodel.remove({}, () => {
@@ -19,15 +20,15 @@ groupＭodel.remove({}, () => {
 })
 
 var refreshToken;
-admin.initializeApp({
-    credential: admin.credential.cert(serviceAccount),
-    databaseURL: "https://macro-duality-160006.firebaseio.com"
-});
+// admin.initializeApp({
+//     credential: admin.credential.cert(serviceAccount),
+//     databaseURL: "https://macro-duality-160006.firebaseio.com"
+// });
 
 
 let url = 'https://graph.facebook.com/v2.8/';
 url = url + 'me?fields=groups{id,email,name,owner,privacy,icon,cover,description}';
-url = url + '&access_token=EAACEdEose0cBALIrteEZAaA1qLwxokGk9ihP5fyF2IZCV5izgfvWTRLlQuwY6ZC4wli3vYYNDuEvNPu83rxZBlaZBKAWZCawXs253hL8vfdNZAJrRnX6pBQQDxNCpKwmEJAiZA2mxVvtKk1eUjWfnj4eZADcoEEL40EIP2YneOISAR8lkGIalKQr3lS69UgFdOhAZD';
+url = url + '&access_token=EAACEdEose0cBAMl4cXy1IxZB3YBeY1IzJe4J2BeSMsD0nMpD4lKRUZBNdraLfaWXClRlgdSJgPkuZC6XKa1vjgvqJFdEBT8YxPZCc83kj4OX2liXQOVnuJZCadNSu9ig7MBShNPMeR8t7Q6tzuE1egxGOTn5tXeIHR5QFsXfnlyMsE721CcoZCvnE3KCdtaSYZD';
 
 
 let alldata = [];

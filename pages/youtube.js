@@ -7,7 +7,7 @@ import TableColumn from 'react-md/lib/DataTables/TableColumn';
 import TableRow from 'react-md/lib/DataTables/TableRow';
 import Button from 'react-md/lib/Buttons';
 import moment from 'moment';
-//import { limit, substring, length } from 'stringz';
+import { limit, substring, length } from 'stringz';
 
 export default class Events extends PureComponent {
     static async getInitialProps({ query: { start, rowsPerPage } }) {
@@ -28,7 +28,7 @@ export default class Events extends PureComponent {
             return TableData.map((_, i) => {
                 //console.log(_);
                 let hrefdata = `https://www.facebook.com/groups/${_.parentGroupId}`;
-                let showmain = `${_.title} - ${_.description}`;
+                let showmain = limit(`${_.title} - ${_.description}`, 60, '...');
                 return (
                     <TableRow key={i} >
                         <TableColumn >    <Button raised href={hrefdata} label="進入社群" /> </TableColumn>
