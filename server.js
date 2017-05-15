@@ -1,23 +1,13 @@
 const express = require('express')
 const next = require('next')
-// const admin = require("firebase-admin");
-// const serviceAccount = require("./serviceAccountKey.json");
-//console.log('serviceAccount');
-//console.log(typeof (serviceAccount));
-//var bluebird = require('bluebird');
-//var redis = require("redis");
-// bluebird.promisifyAll(redis.RedisClient.prototype);
-// bluebird.promisifyAll(redis.Multi.prototype);
-// const lessonData = require('./data/lessonData.json');
 const groupdata = require('./data/groupsimpleData.json');
 var mongoose = require('bluebird').promisifyAll(require('mongoose'));
-//mongoose.connect('mongodb://localhost/readbook');
 var mongodbKey = require("./mongodbKey.json");
-const key = mongodbKey.key.toString();
-//console.log(key);
-//mongoose.connect(`mongodb://readbookdb:${key}@readbookdb.documents.azure.com:10250/readbook?ssl=true`);
-mongoose.connect('mongodb://polo:5201314@128.199.196.98:27020/readbook');
+const mongoString = mongodbKey.mongoString.toString();
 
+//mongoose.connect(`mongodb://readbookdb:${key}@readbookdb.documents.azure.com:10250/readbook?ssl=true`);
+mongoose.connect(mongoString);
+console.log(mongoString);
 //mongoose.Promise = require('bluebird');
 const dev = process.env.NODE_ENV !== 'production'
 const app = next({
@@ -40,7 +30,7 @@ app.prepare()
             //console.log(getdata);
         })
         server.get('/eventtotal/', async (req, res) => {
-            const groupEventSchema = require('./models/groupEventSchema');
+            const groupEventSchema = require('./data/models/groupEventSchema');
             const groupEventＭodel = mongoose.model('groupEventSchema', groupEventSchema);
             var groupEventtotal = await groupEventＭodel.count({});
             //    console.log('Count is ' + groupEventtotal);
@@ -50,7 +40,7 @@ app.prepare()
         server.get('/eventdata/:start/:rowsPerPage/:kinddata?', async (req, res) => {
             let start = (typeof (req.params.start) == "undefined") ? 0 : req.params.start * 1;
             let rowsPerPage = (typeof (req.params.rowsPerPage) == "undefined") ? 10 : req.params.rowsPerPage * 1;
-            const groupEventSchema = require('./models/groupEventSchema');
+            const groupEventSchema = require('./data/models/groupEventSchema');
             const groupEventＭodel = mongoose.model('groupEventSchema', groupEventSchema);
             //console.log(groupEventＭodel);
             let data = await groupEventＭodel.find({}).limit(rowsPerPage).skip(start * 1).sort({ startTime: -1 });
@@ -60,7 +50,7 @@ app.prepare()
         })
 
         server.get('/youtubetotal', async (req, res) => {
-            const youtubeSchema = require('./models/youtubeSchema');
+            const youtubeSchema = require('./data/models/youtubeSchema');
             const youtubeＭodel = mongoose.model('youtubeSchema', youtubeSchema);
             var youtubetotal = await youtubeＭodel.count({});
             //    console.log('Count is ' + youtubetotal);
@@ -73,7 +63,7 @@ app.prepare()
             let start = (typeof (req.params.start) == "undefined") ? 0 : req.params.start * 1;
             let rowsPerPage = (typeof (req.params.rowsPerPage) == "undefined") ? 10 : req.params.rowsPerPage * 1;
             // console.log(rowsPerPage);
-            const youtubeSchema = require('./models/youtubeSchema');
+            const youtubeSchema = require('./data/models/youtubeSchema');
             const youtubeＭodel = mongoose.model('youtubeSchema', youtubeSchema);
             let data = await youtubeＭodel.find({}).limit(rowsPerPage).skip(start * 1).sort({ publishedAt: -1 });
             res.json(data);
