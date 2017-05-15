@@ -6,6 +6,7 @@
     "dev": "node server.js",
     "build": "next build",
     "start": "NODE_ENV=production node ./server.js ",
+    "go": "npm run build  && npm run start",
     "build-css": "node-sass sass/ -o static/"
   },
   "repository": {
