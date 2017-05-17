@@ -38,10 +38,22 @@ https://github.com/mlaursen/react-md/tree/master/examples/with-react-router-v4
 
 12. 把 mongo的sercet抽出來
 
-
-
 allen 大
 @技安 把 package.json 的 dev 改成 "dev": "node --inspect-brk=5858 ./node_modules/.bin/next",
 可以把 node debug 模式開啟來，不過我還是無法停在我要的斷點, 你可以接著研究看看
+react-md 筆記 Rwd 效果不好
 
-react-md 筆記 
+13. 把react-md 換成 material-ui.com
+設定上要注意 有前後端render 問題 
+要使用 
+ static getInitialProps ({ req }) {
+    // Ensures material-ui renders the correct css prefixes server-side
+    let userAgent
+    if (process.browser) {
+      userAgent = navigator.userAgent
+    } else {
+      userAgent = req.headers['user-agent']
+    }
+
+    return { userAgent }
+  }

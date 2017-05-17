@@ -11,8 +11,6 @@ import injectTapEventPlugin from 'react-tap-event-plugin'
 import AppBar from 'material-ui/AppBar';
 import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
-
-
 if (!process.tapEventInjected) {
     injectTapEventPlugin()
     process.tapEventInjected = true
@@ -35,24 +33,12 @@ const muiTheme = {
 }
 
 class Layout extends Component {
-    static getInitialProps({ req }) {
-        // Ensures material-ui renders the correct css prefixes server-side
-        let userAgent
-        if (process.browser) {
-            userAgent = navigator.userAgent
-        } else {
-            userAgent = req.headers['user-agent']
-        }
-        return { userAgent }
-    }
-
     constructor(props, context) {
         super(props, context)
+
     }
     render() {
         const { userAgent, children } = this.props
-        // console.log(children)
-
         const AppBarExampleIcon = () => (
             <AppBar
                 title="歡迎來線上讀書會"
@@ -61,36 +47,23 @@ class Layout extends Component {
         );
         return (
             <MuiThemeProvider muiTheme={getMuiTheme({ userAgent, ...muiTheme })}>
-
-                <div style={styles.container}>
+                <div>
                     <AppBarExampleIcon />
-                    <div style={styles.container2}>
-                        {children}
-                    </div>
-
                 </div>
             </MuiThemeProvider >
         )
     }
 }
 
-
-
-
-export default ({ children, title = 'This is the default title' }) => (
+export default ({ children, title = 'This is the default title', userAgent }) => (
     <div id="body"  >
-
         <Head>
             <title>{title}</title>
             <meta charSet='utf-8' />
             <meta name='viewport' content='initial-scale=1.0, width=device-width' />
         </Head>
-
-        <Layout>
-
+        <Layout userAgent={userAgent}>
             {children}
-
         </Layout>
-
     </div>
 )

@@ -1,6 +1,5 @@
 import Document, { Head } from 'next/document'
-import { DOMProperty } from 'react-dom/lib/ReactInjection'
-import { properties as DOMProperties } from 'react-dom/lib/DOMProperty'
+
 
 export default class MyDocument extends Document {
     render() {
