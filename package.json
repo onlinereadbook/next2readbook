@@ -29,6 +29,7 @@
     "moment": "^2.18.1",
     "mongoose": "^4.9.9",
     "next": "^2.2.0",
+    "next-redux-wrapper": "^1.1.2",
     "node-sass": "^4.5.2",
     "prop-types": "^15.5.8",
     "react": "^15.5.4",
@@ -36,7 +37,10 @@
     "react-addons-transition-group": "^15.5.2",
     "react-dom": "^15.5.4",
     "react-md": "^1.0.12",
+    "react-redux": "^5.0.4",
     "react-tap-event-plugin": "^2.0.1",
+    "redux": "^3.6.0",
+    "redux-thunk": "^2.2.0",
     "request-promise": "^4.2.1",
     "stringz": "^0.2.0"
   },
