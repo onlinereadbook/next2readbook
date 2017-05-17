@@ -1,5 +1,3 @@
-import Link from 'next/link'
-import Head from 'next/head'
 import React, { Component } from 'react'
 import RaisedButton from 'material-ui/RaisedButton'
 import Dialog from 'material-ui/Dialog'
@@ -8,26 +6,21 @@ import FlatButton from 'material-ui/FlatButton'
 import getMuiTheme from 'material-ui/styles/getMuiTheme'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import injectTapEventPlugin from 'react-tap-event-plugin'
-import AppBar from 'material-ui/AppBar';
-import Drawer from 'material-ui/Drawer';
-import MenuItem from 'material-ui/MenuItem';
 
-
+// Make sure react-tap-event-plugin only gets injected once
+// Needed for material-ui
 if (!process.tapEventInjected) {
     injectTapEventPlugin()
     process.tapEventInjected = true
 }
+
 const styles = {
     container: {
-        textAlign: 'left',
-        background: '#f8f8f8'
-    },
-    container2: {
-        background: '#f8f8f8',
-        width: '95%',
-        margin: '0 auto'
+        textAlign: 'center',
+        paddingTop: 200
     }
 }
+
 const muiTheme = {
     palette: {
         accent1Color: deepOrange500
@@ -43,54 +36,30 @@ class Layout extends Component {
         } else {
             userAgent = req.headers['user-agent']
         }
+
         return { userAgent }
     }
 
     constructor(props, context) {
         super(props, context)
+
     }
+
     render() {
         const { userAgent, children } = this.props
-        // console.log(children)
-
-        const AppBarExampleIcon = () => (
-            <AppBar
-                title="歡迎來線上讀書會"
-                iconClassNameRight="muidocs-icon-navigation-expand-more"
-            />
-        );
+        console.log(children)
         return (
             <MuiThemeProvider muiTheme={getMuiTheme({ userAgent, ...muiTheme })}>
-
                 <div style={styles.container}>
-                    <AppBarExampleIcon />
-                    <div style={styles.container2}>
-                        {children}
-                    </div>
 
                 </div>
-            </MuiThemeProvider >
+            </MuiThemeProvider>
         )
     }
 }
 
+export default ({ children }) => {
+    console.log(children)
+    return (<Layout>{children}</Layout>)
 
-
-
-export default ({ children, title = 'This is the default title' }) => (
-    <div id="body"  >
-
-        <Head>
-            <title>{title}</title>
-            <meta charSet='utf-8' />
-            <meta name='viewport' content='initial-scale=1.0, width=device-width' />
-        </Head>
-
-        <Layout>
-
-            {children}
-
-        </Layout>
-
-    </div>
-)
+}

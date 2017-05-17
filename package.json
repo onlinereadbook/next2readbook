@@ -23,7 +23,9 @@
     "components": "^0.1.0",
     "express": "^4.15.2",
     "firebase-admin": "^4.2.1",
+    "glamor": "^2.20.25",
     "isomorphic-fetch": "^2.2.1",
+    "material-ui": "^0.18.1",
     "moment": "^2.18.1",
     "mongoose": "^4.9.9",
     "next": "^2.2.0",
@@ -34,6 +36,7 @@
     "react-addons-transition-group": "^15.5.2",
     "react-dom": "^15.5.4",
     "react-md": "^1.0.12",
+    "react-tap-event-plugin": "^2.0.1",
     "request-promise": "^4.2.1",
     "stringz": "^0.2.0"
   },
