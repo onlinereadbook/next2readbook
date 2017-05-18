@@ -57,3 +57,5 @@ react-md 筆記 Rwd 效果不好
 
     return { userAgent }
   }
+
+  14.安裝redux 方便global state 管理
