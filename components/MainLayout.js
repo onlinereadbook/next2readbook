@@ -19,6 +19,8 @@ import Paper from 'material-ui/Paper';
 import IconLocationOn from 'material-ui/svg-icons/communication/location-on';
 import Login from './Auth/Login'
 import Logged from './Auth/Logged'
+import MenuBar from './Menu/MenuBar'
+
 
 const recentsIcon = <FontIcon className="material-icons">restore</FontIcon>;
 const favoritesIcon = <FontIcon className="material-icons">favorite</FontIcon>;
@@ -50,18 +52,41 @@ export default class MainLayout extends Component {
     constructor(props, context) {
         super(props, context)
         this.state = {
-            selectedIndex: 0
+            selectedIndex: 0,
+            isOpenLoginDialog: false
         };
     }
     select = (index) => this.setState({ selectedIndex: index });
+    swLoginDialog = () => {  //Login的跳出開關
+        //this.props.toggleLoginMenu();
+        this.setState({ isOpenLoginDialog: !this.state.isOpenLoginDialog });
+        console.log(this.state);
+    }
     render() {
         const { userAgent, children } = this.props
         const AppBarExampleIcon = () => (
             <AppBar
                 title="歡迎來線上讀書會"
-                iconElementRight={this.props.isOpenLoginDialog ? <Logged  {...this.props} /> : <Login {...this.props} />}
+                iconElementLeft={<MenuBar />}
+                iconElementRight={this.props.isOpenLoginDialog ?
+                    <Logged swLoginDialog={this.swLoginDialog} {...this.props} /> : <Login swLoginDialog={this.swLoginDialog} {...this.props} />}
+
             />
         );
+        const actions = [
+            <FlatButton
+                label="Cancel"
+                primary={true}
+                onTouchTap={this.swLoginDialog}
+            />,
+            <FlatButton
+                label="Submit"
+                primary={true}
+                keyboardFocused={true}
+                onTouchTap={this.swLoginDialog}
+            />,
+        ];
+
         return (
             <MuiThemeProvider muiTheme={getMuiTheme({ userAgent, ...muiTheme })}>
                 <div>
@@ -91,6 +116,17 @@ export default class MainLayout extends Component {
                         <MenuItem>Menu Item</MenuItem>
                         <MenuItem>Menu Item 2</MenuItem>
                     </Drawer>
+
+
+                    <Dialog
+                        title="Dialog With Actions"
+                        actions={actions}
+                        modal={false}
+                        open={this.state.isOpenLoginDialog}
+                        onRequestClose={this.swLoginDialog}
+                    >
+                        The actions in this window were passed in as an array of React objects.
+        </Dialog>
                 </div>
             </MuiThemeProvider >
         )

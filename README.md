@@ -59,3 +59,5 @@ react-md 筆記 Rwd 效果不好
   }
 
   14.安裝redux 方便global state 管理
+
+  15.在MenuItem新增Link元件<MenuItem primaryText="線上 react 讀書會" containerElement={<Link to="/profile" />} />,

@@ -5,7 +5,7 @@ import React, { Component } from 'react'
 export default class Logged extends Component {
     static muiName = 'FlatButton';
     swLoginDialog = () => {
-        this.props.toggleLoginMenu();
+        this.props.swLoginDialog();
     }
     render() {
         return (
