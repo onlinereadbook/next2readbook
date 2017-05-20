@@ -60,4 +60,17 @@ react-md 筆記 Rwd 效果不好
 
   14.安裝redux 方便global state 管理
 
-  15.在MenuItem新增Link元件<MenuItem primaryText="線上 react 讀書會" containerElement={<Link to="/profile" />} />,
+  15.在MenuItem新增Link元件<MenuItem >
+  golink = (href) => () => console.log(href) 
+   onChange={this.golink.bind(this,'ppp')}
+
+  16.準備做會員機制 採用FB會員登入
+   express-jwt
+   jsonwebtoken
+   passport
+   passport-facebook  
+   會員部分使用
+
+  17.使用 babel-node 
+      "dev2": "babel-node server.js --presets es2015,stage-2",
+   讓他可以支援import

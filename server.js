@@ -5,6 +5,17 @@ var mongoose = require('bluebird').promisifyAll(require('mongoose'));
 var mongodbKey = require("./mongodbKey.json");
 const mongoString = mongodbKey.mongoString.toString();
 
+//import bodyParser from 'body-parser';
+
+//認證部分
+import jwt from 'jsonwebtoken';
+import expressJwt from 'express-jwt';
+import passport from './core/passport';
+import { port, auth } from './config';
+
+
+
+
 //mongoose.connect(`mongodb://readbookdb:${key}@readbookdb.documents.azure.com:10250/readbook?ssl=true`);
 mongoose.connect(mongoString);
 console.log(mongoString);
@@ -81,6 +92,44 @@ app.prepare()
             // }
             return handle(req, res)
         })
+
+
+
+        //
+        // Authentication
+        // -----------------------------------------------------------------------------
+        server.use(expressJwt({
+            secret: auth.jwt.secret,
+            credentialsRequired: false,
+            getToken: req => req.cookies.id_token,
+        }));
+        server.use(passport.initialize());
+
+        server.get('/login/facebook',
+            passport.authenticate('facebook', { scope: ['email', 'user_location'], session: false })
+        );
+        server.get('/login/facebook/return',
+            passport.authenticate('facebook', { failureRedirect: '/login', session: false }),
+            (req, res) => {
+                const expiresIn = 60 * 60 * 24 * 180; // 180 days
+                const token = jwt.sign(req.user, auth.jwt.secret, { expiresIn });
+                res.cookie('id_token', token, { maxAge: 1000 * expiresIn, httpOnly: true });
+                res.redirect('/');
+            }
+        );
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         server.listen(3000, (err) => {
             if (err) throw err

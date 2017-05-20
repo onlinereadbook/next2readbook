@@ -1,11 +1,39 @@
-var mongoose = require('bluebird').promisifyAll(require('mongoose'));
-mongoose.connect('mongodb://localhost/readbook');
-var Schema = mongoose.Schema;
+/**
+ * React Starter Kit (https://www.reactstarterkit.com/)
+ *
+ * Copyright © 2014-2016 Kriasoft, LLC. All rights reserved.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE.txt file in the root directory of this source tree.
+ */
 
-var user = new Schema({
-    name: String,
-    fbId: String,
-    baseinfo: [{ title: String, group: String }],
-    group: [{ groupId: String, groupName: String }]
+import DataType from 'sequelize';
+import Model from '../sequelize';
 
-});
+const User = Model.define('User', {
+
+  id: {
+    type: DataType.UUID,
+    defaultValue: DataType.UUIDV1,
+    primaryKey: true,
+  },
+
+  email: {
+    type: DataType.STRING(255),
+    validate: { isEmail: true },
+  },
+
+  emailConfirmed: {
+    type: DataType.BOOLEAN,
+    defaultValue: false,
+  },
+
+}, {
+
+    indexes: [
+      { fields: ['email'] },
+    ],
+
+  });
+
+export default User;

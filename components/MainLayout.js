@@ -21,6 +21,12 @@ import Login from './Auth/Login'
 import Logged from './Auth/Logged'
 import MenuBar from './Menu/MenuBar'
 
+import Divider from 'material-ui/Divider';
+import TextField from 'material-ui/TextField';
+
+import withStyles from 'isomorphic-style-loader/lib/withStyles';
+//import s from './Login.css';
+
 
 const recentsIcon = <FontIcon className="material-icons">restore</FontIcon>;
 const favoritesIcon = <FontIcon className="material-icons">favorite</FontIcon>;
@@ -48,7 +54,8 @@ const muiTheme = {
     }
 }
 
-export default class MainLayout extends Component {
+
+class MainLayout extends Component {
     constructor(props, context) {
         super(props, context)
         this.state = {
@@ -75,7 +82,7 @@ export default class MainLayout extends Component {
         );
         const actions = [
             <FlatButton
-                label="Cancel"
+                label="取消"
                 primary={true}
                 onTouchTap={this.swLoginDialog}
             />,
@@ -116,19 +123,35 @@ export default class MainLayout extends Component {
                         <MenuItem>Menu Item</MenuItem>
                         <MenuItem>Menu Item 2</MenuItem>
                     </Drawer>
-
-
                     <Dialog
-                        title="Dialog With Actions"
+                        title="會員登入"
                         actions={actions}
                         modal={false}
                         open={this.state.isOpenLoginDialog}
                         onRequestClose={this.swLoginDialog}
                     >
-                        The actions in this window were passed in as an array of React objects.
-        </Dialog>
+                        <Paper zDepth={2}>
+                            <a href="/login/facebook">
+                                <svg
+
+                                    width="30"
+                                    height="30"
+                                    viewBox="0 0 30 30"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                >
+                                    <path
+                                        d="M22 16l1-5h-5V7c0-1.544.784-2 3-2h2V0h-4c-4.072 0-7 2.435-7 7v4H7v5h5v14h6V16h4z"
+                                    />
+                                </svg>
+                                <span>使用 Facebook帳號 登入</span>
+                            </a>
+                        </Paper>
+                    </Dialog>
                 </div>
             </MuiThemeProvider >
         )
     }
 }
+
+
+export default withStyles(s)(MainLayout)
