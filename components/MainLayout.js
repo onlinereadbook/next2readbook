@@ -24,8 +24,9 @@ import MenuBar from './Menu/MenuBar'
 import Divider from 'material-ui/Divider';
 import TextField from 'material-ui/TextField';
 
-import withStyles from 'isomorphic-style-loader/lib/withStyles';
-//import s from './Login.css';
+// import withStyles from 'isomorphic-style-loader/lib/withStyles';
+// import s from './css/Login.css';
+
 
 
 const recentsIcon = <FontIcon className="material-icons">restore</FontIcon>;
@@ -154,4 +155,4 @@ class MainLayout extends Component {
 }
 
 
-export default withStyles(s)(MainLayout)
+export default MainLayout

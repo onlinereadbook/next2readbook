@@ -74,3 +74,8 @@ react-md 筆記 Rwd 效果不好
   17.使用 babel-node 
       "dev2": "babel-node server.js --presets es2015,stage-2",
    讓他可以支援import
+
+   18.ccs部分使用isomorphic-style-loader + postcss-loader +webpack設定
+
+   19.加入middleware  expressJwt
+   20.login時候 使用cookies 紀錄token

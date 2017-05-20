@@ -36,6 +36,22 @@ const handle = app.getRequestHandler()
 app.prepare()
     .then(() => {
         const server = express()
+
+        server.use(expressJwt({
+            secret: auth.jwt.secret,
+            credentialsRequired: false,
+            getToken: req => {
+                if (typeof (req.headers.cookie) !== "undefined") {
+                    const temptoken = req.headers.cookie.split(' ')[2];
+                    const tokenId = temptoken.split('=')[1];
+                    console.log(tokenId);
+                    return tokenId;
+                } else { return null }
+                //req.cookies.id_token
+            }
+        }));
+        server.use(passport.initialize());
+
         server.get('/grouplist', (req, res) => {
             res.end(JSON.stringify(groupdata));
             //console.log(getdata);
@@ -46,6 +62,7 @@ app.prepare()
             var groupEventtotal = await groupEventＭodel.count({});
             //    console.log('Count is ' + groupEventtotal);
             res.end(JSON.stringify(groupEventtotal));
+
 
         })
         server.get('/eventdata/:start/:rowsPerPage/:kinddata?', async (req, res) => {
@@ -82,28 +99,11 @@ app.prepare()
 
         })
 
-        server.get('*', (req, res) => {
-            //這邊可以給初始值使用            
-            //req.req.data=''; //<-- url
-            req.data = "123";
-            // console.log(req.url);
-            // if (req.url === '/youtube') {
-            //     console.log('youtubedata');
-            // }
-            return handle(req, res)
-        })
-
 
 
         //
         // Authentication
         // -----------------------------------------------------------------------------
-        server.use(expressJwt({
-            secret: auth.jwt.secret,
-            credentialsRequired: false,
-            getToken: req => req.cookies.id_token,
-        }));
-        server.use(passport.initialize());
 
         server.get('/login/facebook',
             passport.authenticate('facebook', { scope: ['email', 'user_location'], session: false })
@@ -112,15 +112,31 @@ app.prepare()
             passport.authenticate('facebook', { failureRedirect: '/login', session: false }),
             (req, res) => {
                 const expiresIn = 60 * 60 * 24 * 180; // 180 days
-                const token = jwt.sign(req.user, auth.jwt.secret, { expiresIn });
+                var jwtdata = {};
+                jwtdata.userid = req.user.dataValues.id;
+                const token = jwt.sign(jwtdata.userid, auth.jwt.secret ,{expiresIn:'180 days'});
+                //var token = jwt.sign(req.user, 'shhhhh');
+                //console.log(token);
                 res.cookie('id_token', token, { maxAge: 1000 * expiresIn, httpOnly: true });
-                res.redirect('/');
+                res.redirect('/logined');
             }
         );
 
 
 
 
+
+        server.get('*', (req, res) => {
+            //這邊可以給初始值使用            
+            //req.req.data=''; //<-- url
+            req.data = "123";
+            
+            // console.log(req.url);
+            // if (req.url === '/youtube') {
+            //     console.log('youtubedata');
+            // }
+            return handle(req, res)
+        })
 
 
 
