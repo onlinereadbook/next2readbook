@@ -7,11 +7,11 @@
  * LICENSE.txt file in the root directory of this source tree.
  */
 
-import sequelize from '../sequelize';
-import User from './User';
-import UserLogin from './UserLogin';
-import UserClaim from './UserClaim';
-import UserProfile from './UserProfile';
+const sequelize = require('../sequelize');
+const User = require('./User');
+const UserLogin = require('./UserLogin');
+const UserClaim = require('./UserClaim');
+const UserProfile = require('./UserProfile');
 
 User.hasMany(UserLogin, {
   foreignKey: 'userId',
@@ -38,5 +38,7 @@ function sync(...args) {
   return sequelize.sync(...args);
 }
 
-export default { sync };
-export { User, UserLogin, UserClaim, UserProfile };
+// export default { sync };
+// export { User, UserLogin, UserClaim, UserProfile };
+module.exports.default = sync;
+module.exports = { User, UserLogin, UserClaim, UserProfile };

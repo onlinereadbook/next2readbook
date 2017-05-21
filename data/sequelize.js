@@ -7,8 +7,8 @@
  * LICENSE.txt file in the root directory of this source tree.
  */
 
-import Sequelize from 'sequelize';
-import { databaseUrl } from '../config';
+const Sequelize = require('sequelize');
+const { databaseUrl } = require('../config');
 // console.log(databaseUrl);
 // console.log('databaseUrl')
 const sequelize = new Sequelize(databaseUrl, {
@@ -17,4 +17,5 @@ const sequelize = new Sequelize(databaseUrl, {
     },
 });
 //console.log(sequelize);
-export default sequelize;
+//export default sequelize;
+module.exports = sequelize;

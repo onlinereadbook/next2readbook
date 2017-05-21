@@ -1,22 +1,7 @@
-/**
- * React Starter Kit (https://www.reactstarterkit.com/)
- *
- * Copyright © 2014-2016 Kriasoft, LLC. All rights reserved.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE.txt file in the root directory of this source tree.
- */
-
-/**
- * Passport.js reference implementation.
- * The database schema used in this sample is available at
- * https://github.com/membership/membership.db/tree/master/postgres
- */
-
-import passport from 'passport';
-import { Strategy as FacebookStrategy } from 'passport-facebook';
-import { User, UserLogin, UserClaim, UserProfile } from '../data/models';
-import { auth as config } from '../config';
+const passport = require('passport');
+const FacebookStrategy = require('passport-facebook').Strategy;
+const { User, UserLogin, UserClaim, UserProfile } = require('../data/models');
+const config = require('../config').auth;
 
 /**
  * Sign in with Facebook.
@@ -124,4 +109,5 @@ passport.use(new FacebookStrategy({
     fooBar().catch(done);
 }));
 
-export default passport;
+// export default passport;
+module.exports = passport;

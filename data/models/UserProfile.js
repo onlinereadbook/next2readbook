@@ -1,5 +1,5 @@
-import DataType from 'sequelize';
-import Model from '../sequelize';
+const DataType = require('sequelize');
+const Model = require('../sequelize');
 
 const UserProfile = Model.define('UserProfile', {
 
@@ -30,4 +30,5 @@ const UserProfile = Model.define('UserProfile', {
 
 });
 
-export default UserProfile;
+//export default UserProfile;
+module.exports = UserProfile;

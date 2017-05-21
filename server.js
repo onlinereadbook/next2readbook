@@ -1,5 +1,5 @@
-const express = require('express')
-const next = require('next')
+const express = require('express');
+const next = require('next');
 const groupdata = require('./data/groupsimpleData.json');
 var mongoose = require('bluebird').promisifyAll(require('mongoose'));
 var mongodbKey = require("./mongodbKey.json");
@@ -8,11 +8,12 @@ const mongoString = mongodbKey.mongoString.toString();
 //import bodyParser from 'body-parser';
 
 //認證部分
-import jwt from 'jsonwebtoken';
-import expressJwt from 'express-jwt';
-import passport from './core/passport';
-import { port, auth } from './config';
-
+const jwt = require('jsonwebtoken');
+const expressJwt = require('express-jwt');
+const passport = require('./core/passport');
+const { port } = require('./config');
+// console.log('port');
+// console.log(port);
 
 
 
@@ -26,39 +27,7 @@ const app = next({
 })
 const handle = app.getRequestHandler()
 var api = express.Router()
-api.use(function (req, res, next) {
 
-    if (typeof (req.headers.cookie) !== "undefined") {
-        console.log(req.headers.cookie)
-    }
-
-
-    // var token = req.body.token || req.query.token || req.headers['x-access-token']
-
-
-
-    // if (token) {
-    //     jwt.verify(token, auth.jwt.secret, function (err, decoded) {
-    //         if (err) {
-    //             return res.json({ success: false, message: 'Failed to authenticate token.' })
-    //         } else {
-    //             req.decoded = decoded
-    //             next()
-    //         }
-    //     })
-    // } else {
-    //     return res.status(403).send({
-    //         success: false,
-    //         message: 'No token provided.'
-    //     })
-    // }
-})
-
-
-// admin.initializeApp({
-//     credential: admin.credential.cert(serviceAccount),
-//     databaseURL: "https://macro-duality-160006.firebaseio.com"
-// });
 
 
 app.prepare()
@@ -69,21 +38,19 @@ app.prepare()
         //     secret: auth.jwt.secret,
         //     credentialsRequired: false,
         //     getToken: req => {
-        //         // if (typeof (req.headers.cookie) !== "undefined") {
-        //         //     const temptoken = req.headers.cookie.split(' ')[2];
-        //         //     const tokenId = temptoken.split('=')[1];
-        //         console.log(req.headers.cookie);
-        //         //     return tokenId;
-        //         // } else { return null }
-        //         //req.cookies.id_token
-        //         return null
+        //         if (typeof (req.headers.cookie) !== "undefined") {
+        //             const tokenId = req.headers.cookie.split('id_token=')[1];
+        //              return tokenId;
+        //         } else { return null }
+
+
         //     }
         // }));
         server.use('/member', api);
         server.get('/member', (req, res) => {
             res.send('it is member block');
         });
-        server.use(passport.initialize());
+        //  server.use(passport.initialize());
 
         server.get('/grouplist', (req, res) => {
             res.end(JSON.stringify(groupdata));
@@ -138,23 +105,27 @@ app.prepare()
         // Authentication
         // -----------------------------------------------------------------------------
 
-        server.get('/login/facebook',
-            passport.authenticate('facebook', { scope: ['email', 'user_location'], session: false })
-        );
-        server.get('/login/facebook/return',
-            passport.authenticate('facebook', { failureRedirect: '/login', session: false }),
-            (req, res) => {
-                const expiresIn = 60 * 60 * 24 * 180; // 180 days
-                var jwtdata = {};
-                jwtdata.userid = req.user.dataValues.id;
+        // server.get('/login/facebook',
+        //     passport.authenticate('facebook', { scope: ['email', 'user_location'], session: false })
+        // );
+        // server.get('/login/facebook/return',
+        //     passport.authenticate('facebook', { failureRedirect: '/login', session: false }),
+        //     (req, res) => {
+        //         const expiresIn = 60 * 60 * 24 * 180; // 180 days
+        //         var jwtdata = {};
+        //         jwtdata.userid = req.user.dataValues.id;
 
-                const token = jwt.sign(JSON.stringify(jwtdata), auth.jwt.secret);
-                //var token = jwt.sign(req.user, 'shhhhh');
-                //console.log(token);
-                res.cookie('id_token', token, { maxAge: 1000 * expiresIn, httpOnly: true });
-                res.redirect('/logined');
-            }
-        );
+        //         const token = jwt.sign(JSON.stringify(jwtdata), auth.jwt.secret);
+        //         //req.headers = {};
+        //         //req.headers.authorization = 'Bearer ' + token;
+        //         //$window.sessionStorage.accessToken = token;
+
+        //         //var token = jwt.sign(req.user, 'shhhhh');
+        //         //console.log(token);
+        //         res.cookie('id_token', token, { maxAge: 1000 * expiresIn, httpOnly: true });
+        //         res.redirect('/logined');
+        //     }
+        // );
 
 
 
