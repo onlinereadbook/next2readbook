@@ -148,7 +148,7 @@ app.prepare()
                 var jwtdata = {};
                 jwtdata.userid = req.user.dataValues.id;
 
-                const token = jwt.sign(JSON.stringify(jwtdata), auth.jwt.secret, { expiresIn: 180 });
+                const token = jwt.sign(JSON.stringify(jwtdata), auth.jwt.secret);
                 //var token = jwt.sign(req.user, 'shhhhh');
                 //console.log(token);
                 res.cookie('id_token', token, { maxAge: 1000 * expiresIn, httpOnly: true });
