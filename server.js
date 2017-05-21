@@ -25,6 +25,34 @@ const app = next({
     dev
 })
 const handle = app.getRequestHandler()
+var api = express.Router()
+api.use(function (req, res, next) {
+
+    if (typeof (req.headers.cookie) !== "undefined") {
+        console.log(req.headers.cookie)
+    }
+
+
+    // var token = req.body.token || req.query.token || req.headers['x-access-token']
+
+
+
+    // if (token) {
+    //     jwt.verify(token, auth.jwt.secret, function (err, decoded) {
+    //         if (err) {
+    //             return res.json({ success: false, message: 'Failed to authenticate token.' })
+    //         } else {
+    //             req.decoded = decoded
+    //             next()
+    //         }
+    //     })
+    // } else {
+    //     return res.status(403).send({
+    //         success: false,
+    //         message: 'No token provided.'
+    //     })
+    // }
+})
 
 
 // admin.initializeApp({
@@ -37,19 +65,24 @@ app.prepare()
     .then(() => {
         const server = express()
 
-        server.use(expressJwt({
-            secret: auth.jwt.secret,
-            credentialsRequired: false,
-            getToken: req => {
-                if (typeof (req.headers.cookie) !== "undefined") {
-                    const temptoken = req.headers.cookie.split(' ')[2];
-                    const tokenId = temptoken.split('=')[1];
-                    console.log(tokenId);
-                    return tokenId;
-                } else { return null }
-                //req.cookies.id_token
-            }
-        }));
+        // server.use(expressJwt({
+        //     secret: auth.jwt.secret,
+        //     credentialsRequired: false,
+        //     getToken: req => {
+        //         // if (typeof (req.headers.cookie) !== "undefined") {
+        //         //     const temptoken = req.headers.cookie.split(' ')[2];
+        //         //     const tokenId = temptoken.split('=')[1];
+        //         console.log(req.headers.cookie);
+        //         //     return tokenId;
+        //         // } else { return null }
+        //         //req.cookies.id_token
+        //         return null
+        //     }
+        // }));
+        server.use('/member', api);
+        server.get('/member', (req, res) => {
+            res.send('it is member block');
+        });
         server.use(passport.initialize());
 
         server.get('/grouplist', (req, res) => {
@@ -114,7 +147,8 @@ app.prepare()
                 const expiresIn = 60 * 60 * 24 * 180; // 180 days
                 var jwtdata = {};
                 jwtdata.userid = req.user.dataValues.id;
-                const token = jwt.sign(jwtdata.userid, auth.jwt.secret ,{expiresIn:'180 days'});
+
+                const token = jwt.sign(JSON.stringify(jwtdata), auth.jwt.secret, { expiresIn: 180 });
                 //var token = jwt.sign(req.user, 'shhhhh');
                 //console.log(token);
                 res.cookie('id_token', token, { maxAge: 1000 * expiresIn, httpOnly: true });
@@ -130,7 +164,7 @@ app.prepare()
             //這邊可以給初始值使用            
             //req.req.data=''; //<-- url
             req.data = "123";
-            
+            console.log('123');
             // console.log(req.url);
             // if (req.url === '/youtube') {
             //     console.log('youtubedata');
