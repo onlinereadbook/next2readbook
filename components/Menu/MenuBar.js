@@ -7,19 +7,17 @@ import Download from 'material-ui/svg-icons/file/file-download';
 import ArrowDropRight from 'material-ui/svg-icons/navigation-arrow-drop-right';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import Router from 'next/router'
+import { white, blue500, red500, greenA200 } from 'material-ui/styles/colors';
 
 
 export default class MenuBar extends Component {
-
-
-
     golink = (href) => {
         Router.push(href)
         //console.log(e);
     }
     render() {
         return (<IconMenu
-            iconButtonElement={<IconButton><MoreVertIcon /></IconButton>}
+            iconButtonElement={<IconButton><Download color={white} /></IconButton>}
             anchorOrigin={{ horizontal: 'left', vertical: 'top' }}
             targetOrigin={{ horizontal: 'left', vertical: 'top' }}
         >

@@ -24,6 +24,8 @@ import MenuBar from './Menu/MenuBar'
 import Divider from 'material-ui/Divider';
 import TextField from 'material-ui/TextField';
 
+import { white, blue500, red500, greenA200 } from 'material-ui/styles/colors';
+
 // import withStyles from 'isomorphic-style-loader/lib/withStyles';
 // import s from './css/Login.css';
 
@@ -74,6 +76,7 @@ class MainLayout extends Component {
         const { userAgent, children } = this.props
         const AppBarExampleIcon = () => (
             <AppBar
+
                 title="歡迎來線上讀書會"
                 iconElementLeft={<MenuBar />}
                 iconElementRight={this.props.isOpenLoginDialog ?
@@ -131,22 +134,12 @@ class MainLayout extends Component {
                         open={this.state.isOpenLoginDialog}
                         onRequestClose={this.swLoginDialog}
                     >
-                        <Paper zDepth={2}>
-                            <a href="/login/facebook">
-                                <svg
-
-                                    width="30"
-                                    height="30"
-                                    viewBox="0 0 30 30"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                >
-                                    <path
-                                        d="M22 16l1-5h-5V7c0-1.544.784-2 3-2h2V0h-4c-4.072 0-7 2.435-7 7v4H7v5h5v14h6V16h4z"
-                                    />
-                                </svg>
-                                <span>使用 Facebook帳號 登入</span>
-                            </a>
-                        </Paper>
+                        <div>
+                            <FlatButton href="/login/facebook" label="使用 Facebook帳號 登入"
+                                backgroundColor="#3b59a1"
+                                hoverColor="#2a4996"
+                                style={{ color: 'white' }} />
+                        </div>
                     </Dialog>
                 </div>
             </MuiThemeProvider >

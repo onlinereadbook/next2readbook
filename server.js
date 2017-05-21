@@ -11,16 +11,15 @@ const mongoString = mongodbKey.mongoString.toString();
 const jwt = require('jsonwebtoken');
 const expressJwt = require('express-jwt');
 const passport = require('./core/passport');
-const { port } = require('./config');
-// console.log('port');
-// console.log(port);
-
-
-
+const { port, auth } = require('./config');
 //mongoose.connect(`mongodb://readbookdb:${key}@readbookdb.documents.azure.com:10250/readbook?ssl=true`);
 mongoose.connect(mongoString);
 console.log(mongoString);
 //mongoose.Promise = require('bluebird');
+
+
+
+
 const dev = process.env.NODE_ENV !== 'production'
 const app = next({
     dev
@@ -28,11 +27,20 @@ const app = next({
 const handle = app.getRequestHandler()
 var api = express.Router()
 
+api.use(
+    expressJwt({
+        secret: auth.jwt.secret,
+        credentialsRequired: false,
+        getToken: req => {
+            console.log(req.headers.cookie);
+        }
+    }))
 
 
 app.prepare()
     .then(() => {
         const server = express()
+        server.use(passport.initialize());
 
         // server.use(expressJwt({
         //     secret: auth.jwt.secret,
@@ -50,7 +58,6 @@ app.prepare()
         server.get('/member', (req, res) => {
             res.send('it is member block');
         });
-        //  server.use(passport.initialize());
 
         server.get('/grouplist', (req, res) => {
             res.end(JSON.stringify(groupdata));
@@ -105,27 +112,27 @@ app.prepare()
         // Authentication
         // -----------------------------------------------------------------------------
 
-        // server.get('/login/facebook',
-        //     passport.authenticate('facebook', { scope: ['email', 'user_location'], session: false })
-        // );
-        // server.get('/login/facebook/return',
-        //     passport.authenticate('facebook', { failureRedirect: '/login', session: false }),
-        //     (req, res) => {
-        //         const expiresIn = 60 * 60 * 24 * 180; // 180 days
-        //         var jwtdata = {};
-        //         jwtdata.userid = req.user.dataValues.id;
+        server.get('/login/facebook',
+            passport.authenticate('facebook', { scope: ['email', 'user_location'], session: false })
+        );
+        server.get('/login/facebook/return',
+            passport.authenticate('facebook', { failureRedirect: '/login', session: false }),
+            (req, res) => {
+                const expiresIn = 60 * 60 * 24 * 180; // 180 days
+                var jwtdata = {};
+                jwtdata.userid = req.user.dataValues.id;
 
-        //         const token = jwt.sign(JSON.stringify(jwtdata), auth.jwt.secret);
-        //         //req.headers = {};
-        //         //req.headers.authorization = 'Bearer ' + token;
-        //         //$window.sessionStorage.accessToken = token;
+                const token = jwt.sign(jwtdata, auth.jwt.secret);
+                //req.headers = {};
+                //req.headers.authorization = 'Bearer ' + token;
+                //$window.sessionStorage.accessToken = token;
 
-        //         //var token = jwt.sign(req.user, 'shhhhh');
-        //         //console.log(token);
-        //         res.cookie('id_token', token, { maxAge: 1000 * expiresIn, httpOnly: true });
-        //         res.redirect('/logined');
-        //     }
-        // );
+                //var token = jwt.sign(req.user, 'shhhhh');
+                //console.log(token);
+                res.cookie('id_token', token, { maxAge: 1000 * expiresIn, httpOnly: true });
+                res.redirect('/logined');
+            }
+        );
 
 
 

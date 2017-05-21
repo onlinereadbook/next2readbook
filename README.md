@@ -79,4 +79,4 @@ react-md 筆記 Rwd 效果不好
 
    19.加入middleware  expressJwt
    20.login時候 使用cookies 紀錄token
-   21.改回 es6 node 模式 不要使用 import
+   21.改回   不要使用 import模式 
