@@ -12,6 +12,8 @@ const jwt = require('jsonwebtoken');
 const expressJwt = require('express-jwt');
 const passport = require('./core/passport');
 const { port, auth } = require('./config');
+//const expressflash = require('express-flash');
+
 //mongoose.connect(`mongodb://readbookdb:${key}@readbookdb.documents.azure.com:10250/readbook?ssl=true`);
 mongoose.connect(mongoString);
 console.log(mongoString);
@@ -27,12 +29,17 @@ const app = next({
 const handle = app.getRequestHandler()
 var api = express.Router()
 
+//因為用cookies驗證所以如果有cookies的話就給他 return 看看這個token是否有正確
 api.use(
     expressJwt({
         secret: auth.jwt.secret,
         credentialsRequired: false,
         getToken: req => {
-            console.log(req.headers.cookie);
+            if (req.headers.cookie.includes('id_token')) {
+                //console.log()
+                //return '123';
+                return req.headers.cookie.split('id_token=')[1];
+            }
         }
     }))
 
@@ -41,7 +48,20 @@ app.prepare()
     .then(() => {
         const server = express()
         server.use(passport.initialize());
-
+        // server.use(express.session({ cookie: { maxAge: 60000 } }));
+        // server.use(expressflash());
+        server.use(
+            expressJwt({
+                secret: auth.jwt.secret,
+                credentialsRequired: false,
+                getToken: req => {
+                    if (req.headers.cookie) {
+                        if (req.headers.cookie.includes('id_token')) {
+                            return req.headers.cookie.split('id_token=')[1];
+                        }
+                    }
+                }
+            }))
         // server.use(expressJwt({
         //     secret: auth.jwt.secret,
         //     credentialsRequired: false,
@@ -111,6 +131,21 @@ app.prepare()
         //
         // Authentication
         // -----------------------------------------------------------------------------
+        server.post('/login/local',
+            passport.authenticate('local', {
+                successRedirect: '/',
+                failureRedirect: '/login',
+                failureFlash: false
+            }));
+
+        // server.post('/login/local', (req, res) => {
+        //     res.send('test');
+        // });
+
+
+
+
+
 
         server.get('/login/facebook',
             passport.authenticate('facebook', { scope: ['email', 'user_location'], session: false })
@@ -122,7 +157,7 @@ app.prepare()
                 var jwtdata = {};
                 jwtdata.userid = req.user.dataValues.id;
 
-                const token = jwt.sign(jwtdata, auth.jwt.secret);
+                const token = jwt.sign(jwtdata, auth.jwt.secret, { expiresIn: '180d' });
                 //req.headers = {};
                 //req.headers.authorization = 'Bearer ' + token;
                 //$window.sessionStorage.accessToken = token;

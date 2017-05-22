@@ -129,16 +129,17 @@ class MainLayout extends Component {
                     </Drawer>
                     <Dialog
                         title="會員登入"
-                        actions={actions}
                         modal={false}
                         open={this.state.isOpenLoginDialog}
                         onRequestClose={this.swLoginDialog}
+                        contentStyle={{ maxWidth: 500 }}
                     >
-                        <div>
+                        <div  >
                             <FlatButton href="/login/facebook" label="使用 Facebook帳號 登入"
                                 backgroundColor="#3b59a1"
                                 hoverColor="#2a4996"
-                                style={{ color: 'white' }} />
+                                style={{ color: 'white' }}
+                                fullWidth={true} />
                         </div>
                     </Dialog>
                 </div>

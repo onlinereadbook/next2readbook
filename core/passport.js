@@ -1,11 +1,33 @@
 const passport = require('passport');
 const FacebookStrategy = require('passport-facebook').Strategy;
+const LocalStrategy = require('passport-local').Strategy;
 const { User, UserLogin, UserClaim, UserProfile } = require('../data/models');
 const config = require('../config').auth;
 
 /**
  * Sign in with Facebook.
  */
+
+passport.use(new LocalStrategy({
+    usernameField: 'email',
+    passwordField: 'passwd'
+},
+    function (username, password, done) {
+        var testobj = { username: 'polo', password: '123' }
+        console.log('飄過');
+        return done(null, testobj);
+        // User.findOne({ username: username }, function (err, user) {
+        //     if (err) { return done(err); }
+        //     if (!user) {
+        //         return done(null, false, { message: 'Incorrect username.' });
+        //     }
+        //     if (!user.validPassword(password)) {
+        //         return done(null, false, { message: 'Incorrect password.' });
+        //     }
+        //     return done(null, user);
+        // });
+    }
+));
 
 passport.use(new FacebookStrategy({
     clientID: config.facebook.id,
