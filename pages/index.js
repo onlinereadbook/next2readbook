@@ -43,7 +43,7 @@ class indexpage extends React.Component {
     render() {
 
         return <Layout {...this.props}>
-            <Card>
+            <Card >
                 <CardHeader
                     title="線上讀書會 在學習的路上一路相陪"
                     subtitle="一起揪團攻略吧"
