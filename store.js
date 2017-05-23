@@ -7,12 +7,15 @@ const MyInitialState = {
     isLogin: false,
     isOpenMenu: false,
     isOpenLoginDialog: false,
-    token: ""
+    idToken: "",
+    userInfo: { picture: "" }
 }
 //給他程式呼叫用的action
 export const actionTypes = {
     TOGGLEMENU: 'TOGGLEMENU',
-    TOGGLELOGINDIALOG: 'TOGGLELOGINDIALOG'
+    TOGGLELOGINDIALOG: 'TOGGLELOGINDIALOG',
+    SETISLOGIN: 'SETISLOGIN',
+    SETPICTURE: 'SETPICTURE'
 }
 //Reducers
 export const reducer = (state = MyInitialState, action) => {
@@ -27,7 +30,8 @@ export const reducer = (state = MyInitialState, action) => {
             ///   console.log('reducer go');
             const isOpenLoginDialog = (state.isOpenLoginDialog == false) ? true : false;
             return Object.assign({}, state, { isOpenLoginDialog: isOpenLoginDialog })
-
+        case "SETISLOGIN":
+            return Object.assign({}, state, { isLogin: action.payload.isLogin })
 
         default:
             //console.log('defulat');
@@ -52,5 +56,10 @@ export const toggleMenu = () => dispatch => {
 export const toggleLoginMenu = () => dispatch => {
     console.log('dispatch  toggleLoginMenu go');
     return dispatch({ type: actionTypes.TOGGLELOGINDIALOG })
-
+}
+export const setIsLogin = (isLogin) => dispatch => {
+    return dispatch({ type: actionTypes.SETISLOGIN, payload: { isLogin } })
+}
+export const setPicture = (isLogin) => dispatch => {
+    return dispatch({ type: actionTypes.SETPICTURE, payload: { picture } })
 }

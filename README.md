@@ -82,3 +82,17 @@ react-md 筆記 Rwd 效果不好
    21.改回   不要使用 import模式 
    22.找出className 在哪裡設定
    23.加入已登入與登出
+
+   24.material-ui 要build的時候要加這一段並使用 npm run build 不能直接next build
+
+   module.exports = {
+    webpack: (config, { dev }) => {
+        // Remove minifed react aliases for material-ui so production builds work
+        if (config.resolve.alias) {
+            delete config.resolve.alias.react
+            delete config.resolve.alias['react-dom']
+        }
+
+        return config
+    }
+}

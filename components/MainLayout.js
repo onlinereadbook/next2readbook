@@ -73,12 +73,12 @@ class MainLayout extends Component {
         console.log(this.state);
     }
     render() {
-        const { userAgent, children } = this.props
+        const { userAgent, children, isLogin } = this.props
         const AppBarExampleIcon = () => (
             <AppBar
                 title="歡迎來線上讀書會"
                 iconElementLeft={<MenuBar />}
-                iconElementRight={this.props.isOpenLoginDialog ?
+                iconElementRight={this.props.isLogin ?
                     <Logged swLoginDialog={this.swLoginDialog} {...this.props} /> : <Login swLoginDialog={this.swLoginDialog} {...this.props} />}
 
             />

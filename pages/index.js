@@ -4,7 +4,7 @@ import FlatButton from 'material-ui/FlatButton';
 import Avatar from 'material-ui/Avatar';
 import React, { PureComponent } from 'react';
 import { bindActionCreators } from 'redux'
-import { initStore, toggleMenu, toggleLoginMenu } from '../store'
+import { initStore, toggleMenu, toggleLoginMenu, setIsLogin } from '../store'
 import withRedux from 'next-redux-wrapper'
 
 const styles = {
@@ -21,6 +21,8 @@ const styles = {
 class indexpage extends React.Component {
     static getInitialProps({ req, store, isServer }) {
         // Ensures material-ui renders the correct css prefixes server-side
+        // console.log('req.isLogin');
+        // console.log();
         let userAgent
         if (process.browser) {
             userAgent = navigator.userAgent
@@ -28,7 +30,10 @@ class indexpage extends React.Component {
             userAgent = req.headers['user-agent']
         }
 
-        //store.dispatch(toggleMenu())
+        // store.dispatch(toggleMenu())
+        store.dispatch(setIsLogin(req.isLogin))
+
+
         //console.log(toggleMenu());
         // store.dispatch(serverRenderClock(isServer))
         //store.dispatch(addCount())
@@ -77,7 +82,9 @@ const mapDispatchToState = (state) => {
     //console.log(state)
     return ({
         isOpenMenu: state.isOpenMenu,
-        isOpenLoginDialog: state.isOpenLoginDialog
+        isOpenLoginDialog: state.isOpenLoginDialog,
+        isLogin: state.isLogin
+
     })
 };
 

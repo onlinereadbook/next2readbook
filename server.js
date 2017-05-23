@@ -1,10 +1,10 @@
 const express = require('express');
 const next = require('next');
 const groupdata = require('./data/groupsimpleData.json');
-var mongoose = require('bluebird').promisifyAll(require('mongoose'));
-var mongodbKey = require("./mongodbKey.json");
+const mongoose = require('bluebird').promisifyAll(require('mongoose'));
+const mongodbKey = require("./mongodbKey.json");
 const mongoString = mongodbKey.mongoString.toString();
-
+const cookieParser = require('cookie-parser');
 //import bodyParser from 'body-parser';
 
 //認證部分
@@ -12,6 +12,7 @@ const jwt = require('jsonwebtoken');
 const expressJwt = require('express-jwt');
 const passport = require('./core/passport');
 const { port, auth } = require('./config');
+const userIsLogin = require('./commonjs/userIsLogin.js');
 //const expressflash = require('express-flash');
 
 //mongoose.connect(`mongodb://readbookdb:${key}@readbookdb.documents.azure.com:10250/readbook?ssl=true`);
@@ -27,41 +28,43 @@ const app = next({
     dev
 })
 const handle = app.getRequestHandler()
-var api = express.Router()
+//var api = express.Router()
 
 //因為用cookies驗證所以如果有cookies的話就給他 return 看看這個token是否有正確
-api.use(
-    expressJwt({
-        secret: auth.jwt.secret,
-        credentialsRequired: false,
-        getToken: req => {
-            if (req.headers.cookie.includes('id_token')) {
-                //console.log()
-                //return '123';
-                return req.headers.cookie.split('id_token=')[1];
-            }
-        }
-    }))
+// api.use(
+//     expressJwt({
+//         secret: auth.jwt.secret,
+//         credentialsRequired: false,
+//         getToken: req => {
+//             if (req.headers.cookie.includes('id_token')) {
+//                 //console.log()
+//                 //return '123';
+//                 return req.headers.cookie.split('id_token=')[1];
+//             }
+//         }
+//     }))
 
 
 app.prepare()
     .then(() => {
         const server = express()
+        server.use(cookieParser());
+
         server.use(passport.initialize());
         // server.use(express.session({ cookie: { maxAge: 60000 } }));
         // server.use(expressflash());
-        server.use(
-            expressJwt({
-                secret: auth.jwt.secret,
-                credentialsRequired: false,
-                getToken: req => {
-                    if (req.headers.cookie) {
-                        if (req.headers.cookie.includes('id_token')) {
-                            return req.headers.cookie.split('id_token=')[1];
-                        }
-                    }
-                }
-            }))
+        // server.use(
+        //     expressJwt({
+        //         secret: auth.jwt.secret,
+        //         credentialsRequired: false,
+        //         getToken: req => {
+        //             if (req.headers.cookie) {
+        //                 if (req.headers.cookie.includes('id_token')) {
+        //                     return req.headers.cookie.split('id_token=')[1];
+        //                 }
+        //             }
+        //         }
+        //     }))
         // server.use(expressJwt({
         //     secret: auth.jwt.secret,
         //     credentialsRequired: false,
@@ -74,10 +77,10 @@ app.prepare()
 
         //     }
         // }));
-        server.use('/member', api);
-        server.get('/member', (req, res) => {
-            res.send('it is member block');
-        });
+        // server.use('/member', api);
+        // server.get('/member', (req, res) => {
+        //     res.send('it is member block');
+        // });
 
         server.get('/grouplist', (req, res) => {
             res.end(JSON.stringify(groupdata));
@@ -173,11 +176,29 @@ app.prepare()
 
 
 
-        server.get('*', (req, res) => {
-            //這邊可以給初始值使用            
-            //req.req.data=''; //<-- url
-            req.data = "123";
-            console.log('123');
+        server.get('*', async (req, res) => {
+
+            req.isLogin = false;
+            if (req.cookies.id_token) {
+                try {
+                    var decoded = jwt.verify(req.cookies.id_token, auth.jwt.secret);
+                    req.isLogin = await userIsLogin(decoded)
+                    console.log('req.isLogin');
+                    console.log(req.isLogin);
+                } catch (err) {
+                    // err
+                }
+            }
+            // console.log('req.cookies.id_token');
+            // console.log(req.cookies.id_token);
+            // if (req.headers.cookie) {
+            //     if (req.headers.cookie.includes('id_token')) {
+            //         const id_token = req.headers.cookie.split('id_token=')[1];
+
+            //     }
+            // }
+
+
             // console.log(req.url);
             // if (req.url === '/youtube') {
             //     console.log('youtubedata');
