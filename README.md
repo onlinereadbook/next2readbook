@@ -96,3 +96,8 @@ react-md 筆記 Rwd 效果不好
         return config
     }
 }
+
+25.套件改成koa 登入改成firebase
+參考https://www.youtube.com/watch?v=Dn9vMaX3FZY
+
+26.next hmr模式 firebase 會一直初始化 這個部分需要校調一下

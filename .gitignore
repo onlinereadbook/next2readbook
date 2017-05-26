@@ -4,6 +4,8 @@ youtubekey.js
 serviceAccountKey.json
 mongodbKey.json
 .cronjob
+firebaseCert.json
+./config
 # Logs
 logs
 *.log

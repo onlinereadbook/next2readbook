@@ -20,9 +20,6 @@ mongoose.connect(mongoString);
 console.log(mongoString);
 //mongoose.Promise = require('bluebird');
 
-
-
-
 const dev = process.env.NODE_ENV !== 'production'
 const app = next({
     dev
